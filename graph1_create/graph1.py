@@ -17,7 +17,6 @@ sea.plot()
 #plot formatting:
 fp = FontProperties(fname='./fonts/KaishoMCBK1Pro-DeBold.otf', size=20)
 fp_label = FontProperties(fname='./fonts/KaishoMCBK1Pro-DeBold.otf', size=14)
-rcParams['font.family'] = fp.get_name()
 
 plt.title("高知県の水産業の温度[℃]",fontproperties=fp)
 plt.ylabel('温度[℃]',fontproperties=fp_label)
