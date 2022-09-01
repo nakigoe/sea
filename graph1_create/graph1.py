@@ -9,8 +9,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 sea = pd.read_csv('./input/raw_data.csv')
-
 sea.plot()
+
+#plot formatting:
+plt.title("高知県の水産業の温度[℃]")
+plt.ylabel('温度[℃]')
 
 #saving
 tr = datetime.utcnow() + timedelta(milliseconds=0.5) #correct time rounding trick
