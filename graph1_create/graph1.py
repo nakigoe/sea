@@ -19,7 +19,6 @@ plt.savefig("./output/graph1_" + timestr + ".svg", format="svg")
 
 #comment the following section out when moving the project to production:
 plt.show()
-
 #Two  lines to make our compiler able to draw:
 plt.savefig(sys.stdout.buffer)
 sys.stdout.flush()
