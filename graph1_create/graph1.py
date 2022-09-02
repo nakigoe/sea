@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 #matplotlib.use('Agg')
 
 sea = pd.read_csv('./input/raw_data.csv')
-sea.plot(kind = 'line', x = '日時', y = '温度', legend=False)
+sea.plot(kind = 'line', x = '日時', y = '温度', legend=False, figsize=(12, 6.75))
 
 #plot formatting:
 fp = FontProperties(fname='./fonts/msgothic.ttc', size=19)
