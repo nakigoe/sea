@@ -1,18 +1,16 @@
 #Three lines to make our compiler able to draw:
 import sys
-import matplotlib
-import time
+import matplotlib as mpl
 from datetime import datetime, timedelta
 from matplotlib.font_manager import FontProperties
-from matplotlib import rcParams
 
 import pandas as pd
 import matplotlib.pyplot as plt
 
-#matplotlib.use('Agg')
+cmap = mpl.cm.cool
 
 sea = pd.read_csv('./input/raw_data.csv')
-sea.plot(kind = 'line', x = '日時', y = '温度', legend=False, figsize=(12, 6.75), yticks=[10,12,14,16,18,20,22,24,26,28,30])
+sea.plot(kind = 'line', x = '日時', y = '温度', legend=False, figsize=(12, 6.75), yticks=[10,12,14,16,18,20,22,24,26,28,30], colormap=cmap)
 
 #plot formatting:
 fp = FontProperties(fname='./fonts/msgothic.ttc', size=19)
