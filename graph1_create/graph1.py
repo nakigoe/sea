@@ -12,11 +12,11 @@ import matplotlib.pyplot as plt
 #matplotlib.use('Agg')
 
 sea = pd.read_csv('./input/raw_data.csv')
-sea.plot()
+sea.plot(kind = 'line', x = '日時', y = '温度')
 
 #plot formatting:
-fp = FontProperties(fname='./fonts/msgothic.ttc', size=20)
-fp_label = FontProperties(fname='./fonts/msgothic.ttc', size=14)
+fp = FontProperties(fname='./fonts/msgothic.ttc', size=19)
+fp_label = FontProperties(fname='./fonts/msgothic.ttc', size=16)
 
 plt.title("高知県の水産業の温度[℃]",fontproperties=fp)
 plt.ylabel('温度[℃]',fontproperties=fp_label)
