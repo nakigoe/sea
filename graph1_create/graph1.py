@@ -7,10 +7,15 @@ from matplotlib.font_manager import FontProperties
 import pandas as pd
 import matplotlib.pyplot as plt
 
-cmap = mpl.cm.cool
+cmap = mpl.cm.cool #Color map for the temperature graph not working yet 
 
+#custom_date_parser = lambda x: datetime.strptime(x, "%Y/%m/%d %H:%M")
+#sea = pd.read_csv('./input/raw_data.csv', parse_dates=['date'], date_parser=custom_date_parser)
 sea = pd.read_csv('./input/raw_data.csv')
-sea.plot(kind = 'line', x = '日時', y = '温度', legend=False, figsize=(12, 6.75), yticks=[10,12,14,16,18,20,22,24,26,28,30], colormap=cmap)
+
+sea['日時'] = pd.to_datetime(sea['日時'], format = '%Y/%m/%d %H:%M')
+
+sea.plot(kind = 'line', x = '日時', y = '温度', legend=False, figsize=(12, 6.75), yticks=[10,12,14,16,18,20,22,24,26,28,30], colormap=cmap) #figsize: size in inches
 
 #plot formatting:
 fp = FontProperties(fname='./fonts/msgothic.ttc', size=19)
