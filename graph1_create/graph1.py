@@ -12,14 +12,15 @@ import matplotlib.pyplot as plt
 #matplotlib.use('Agg')
 
 sea = pd.read_csv('./input/raw_data.csv')
-sea.plot(kind = 'line', x = '日時', y = '温度')
+sea.plot(kind = 'line', x = '日時', y = '温度', legend=False)
 
 #plot formatting:
 fp = FontProperties(fname='./fonts/msgothic.ttc', size=19)
-fp_label = FontProperties(fname='./fonts/msgothic.ttc', size=16)
+fp_label = FontProperties(fname='./fonts/msgothic.ttc', size=15)
 
 plt.title("高知県の水産業の温度[℃]",fontproperties=fp)
 plt.ylabel('温度[℃]',fontproperties=fp_label)
+plt.xlabel('日時',fontproperties=fp_label)
 
 #saving
 tr = datetime.utcnow() + timedelta(milliseconds=0.5) #correct time rounding trick
