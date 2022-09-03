@@ -7,6 +7,9 @@ from matplotlib.font_manager import FontProperties
 import pandas as pd
 import matplotlib.pyplot as plt
 
+import seaborn as sns
+sns.set_theme(style="darkgrid")
+
 cmap = mpl.cm.cool #Color map for the temperature graph not working yet 
 
 #custom_date_parser = lambda x: datetime.strptime(x, "%Y/%m/%d %H:%M")
@@ -24,6 +27,8 @@ fp_label = FontProperties(fname='./fonts/msgothic.ttc', size=15)
 plt.title("高知県の水産業の温度[℃]",fontproperties=fp)
 plt.ylabel('温度[℃]',fontproperties=fp_label)
 plt.xlabel('日時',fontproperties=fp_label)
+plt.xticks(rotation = 45, ha = 'right')
+
 
 #saving
 tr = datetime.utcnow() + timedelta(milliseconds=0.5) #correct time rounding trick
