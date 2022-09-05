@@ -12,7 +12,7 @@ import numpy as np
 #import seaborn as sns
 #sns.set_theme(style="darkgrid")
 
-cmap = mpl.cm.cool #Color map for the temperature graph not working yet 
+cmap = mpl.cm.plasma #Color map for the temperature graph not working yet 
 sea = pd.read_csv('./input/raw_data.csv')
 
 #custom_date_parser = lambda x: datetime.strptime(x, "%Y/%m/%d %H:%M")
@@ -22,7 +22,7 @@ sea['日時'] = pd.to_datetime(sea['日時'], format = '%Y/%m/%d %H:%M')
 
 #as a variant: yticks=[10,12,14,16,18,20,22,24,26,28,30],
 
-meow = sea.plot(kind = 'line', x = '日時', y = '温度', legend=False, figsize=(12, 6.75),  colormap=cmap, marker = 'o', ms = 8, mec = 'b', mfc = '#4CAF80', lw=2) #figsize: size in inches
+meow = sea.plot(kind = 'line', x = '日時', y = '温度', legend=False, figsize=(12, 6.75),  colormap=cmap, marker = 'o', clip_on=False, ms = 8, mec = 'b', mfc = '#4CAF80', lw=2) #figsize: size in inches
 
 # Disjoin bottom / left spines by moving them outwards
 for s in ['bottom', 'left']: meow.spines[s].set_position(('outward', 12))
@@ -57,7 +57,9 @@ plt.rcParams.update({
     'ytick.major.pad': 15,
     'ytick.minor.pad': 15,
     })
+
 plt.grid(axis = 'y', color = 'grey', linewidth = 0.334)
+
 #saving
 tr = datetime.utcnow() + timedelta(milliseconds=0.5) #correct time rounding trick
 timestr = tr.strftime("%Y%m%d%H%M%S%f")[:-3]
