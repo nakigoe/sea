@@ -7,8 +7,9 @@ from matplotlib.font_manager import FontProperties
 import pandas as pd
 import matplotlib.pyplot as plt
 
-import seaborn as sns
-sns.set_theme(style="darkgrid")
+# explore seaborn vs plt.rcParams:
+#import seaborn as sns
+#sns.set_theme(style="darkgrid")
 
 cmap = mpl.cm.cool #Color map for the temperature graph not working yet 
 
