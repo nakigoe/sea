@@ -7,6 +7,7 @@ from matplotlib.font_manager import FontProperties
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.ticker as ticker
 
 # explore seaborn vs plt.rcParams:
 #import seaborn as sns
@@ -30,6 +31,12 @@ meow.spines.top.set_visible(False)
 # Only show ticks on the left and bottom spines
 meow.yaxis.set_ticks_position('left')
 meow.xaxis.set_ticks_position('bottom')
+
+#ticks step
+start, end = meow.get_ylim()
+meow.yaxis.set_ticks(np.arange(int(start), int(end), 1))
+meow.yaxis.set_major_formatter(ticker.FormatStrFormatter('%0.1f'))
+
 # Disjoin bottom / left spines by moving them outwards
 for s in ['bottom', 'left']: meow.spines[s].set_position(('outward', 12))
 
