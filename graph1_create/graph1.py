@@ -6,16 +6,17 @@ from matplotlib.font_manager import FontProperties
 
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 
 # explore seaborn vs plt.rcParams:
 #import seaborn as sns
 #sns.set_theme(style="darkgrid")
 
 cmap = mpl.cm.cool #Color map for the temperature graph not working yet 
+sea = pd.read_csv('./input/raw_data.csv')
 
 #custom_date_parser = lambda x: datetime.strptime(x, "%Y/%m/%d %H:%M")
-#sea = pd.read_csv('./input/raw_data.csv', parse_dates=['date'], date_parser=custom_date_parser)
-sea = pd.read_csv('./input/raw_data.csv')
+#sea = pd.read_csv('./input/raw_data.csv', parse_dates=['日時'], date_parser=custom_date_parser)
 
 sea['日時'] = pd.to_datetime(sea['日時'], format = '%Y/%m/%d %H:%M')
 
