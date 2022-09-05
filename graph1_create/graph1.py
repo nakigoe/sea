@@ -32,7 +32,7 @@ meow.spines.top.set_visible(False)
 meow.yaxis.set_ticks_position('left')
 meow.xaxis.set_ticks_position('bottom')
 
-#ticks step
+#y ticks step:
 start, end = meow.get_ylim()
 meow.yaxis.set_ticks(np.arange(int(start), int(end), 1))
 meow.yaxis.set_major_formatter(ticker.FormatStrFormatter('%0.1f'))
