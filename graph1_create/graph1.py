@@ -18,9 +18,8 @@ cmap = mpl.cm.cool #Color map for the temperature graph not working yet
 sea = pd.read_csv('./input/raw_data.csv')
 
 sea['日時'] = pd.to_datetime(sea['日時'], format = '%Y/%m/%d %H:%M')
-reversed_sea = sea.iloc[::-1] #the most recent data in the CSV file is at the top, as of September 2022
 
-meow = reversed_sea.plot(kind = 'line', x = '日時', y = '温度', legend=False, figsize=(12, 6.75), yticks=[10,12,14,16,18,20,22,24,26,28,30], colormap=cmap) #figsize: size in inches
+meow = sea.plot(kind = 'line', x = '日時', y = '温度', legend=False, figsize=(12, 6.75), yticks=[10,12,14,16,18,20,22,24,26,28,30], colormap=cmap) #figsize: size in inches
 
 # Disjoin bottom / left spines by moving them outwards
 for s in ['bottom', 'left']: meow.spines[s].set_position(('outward', 12))
