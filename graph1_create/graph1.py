@@ -23,7 +23,13 @@ sea['日時'] = pd.to_datetime(sea['日時'], format = '%Y/%m/%d %H:%M')
 #as a variant: yticks=[10,12,14,16,18,20,22,24,26,28,30],
 
 meow = sea.plot(kind = 'line', x = '日時', y = '温度', legend=False, figsize=(12, 6.75),  colormap=cmap, marker = 'o', clip_on=False, ms = 8, mec = 'b', mfc = '#4CAF80', lw=2) #figsize: size in inches
+# Hide the right and top spines
+meow.spines.right.set_visible(False)
+meow.spines.top.set_visible(False)
 
+# Only show ticks on the left and bottom spines
+meow.yaxis.set_ticks_position('left')
+meow.xaxis.set_ticks_position('bottom')
 # Disjoin bottom / left spines by moving them outwards
 for s in ['bottom', 'left']: meow.spines[s].set_position(('outward', 12))
 
