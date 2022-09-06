@@ -8,6 +8,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.ticker as ticker
+import matplotlib.dates as mdates
+import datetime as dt
 
 # explore seaborn vs plt.rcParams:
 #import seaborn as sns
@@ -19,11 +21,17 @@ sea = pd.read_csv('./input/raw_data.csv')
 #custom_date_parser = lambda x: datetime.strptime(x, "%Y/%m/%d %H:%M")
 #sea = pd.read_csv('./input/raw_data.csv', parse_dates=['日時'], date_parser=custom_date_parser)
 
-sea['日時'] = pd.to_datetime(sea['日時'], format = '%Y/%m/%d %H:%M')
+x = sea['日時'] = pd.to_datetime(sea['日時'], format = '%Y/%m/%d %H:%M')
+
+#display dataframe in conslole, remove when converting for production :
+pd.set_option('display.max_columns', None)
+sea.head()
+print(sea)
 
 #as a variant: yticks=[10,12,14,16,18,20,22,24,26,28,30],
 
-meow = sea.plot(kind = 'line', x = '日時', y = '温度', legend=False, figsize=(12, 6.75),  colormap=cmap, marker = 'o', clip_on=False, ms = 8, mec = 'b', mfc = '#4CAF80', lw=2) #figsize: size in inches
+meow = sea.plot(kind = 'line', x = '日時', y = '温度', legend=False, figsize=(12, 6.75), colormap=cmap, marker = 'o', clip_on=False, ms = 8, mec = 'b', mfc = '#4CAF80', lw=2) #figsize: size in inches
+
 # Hide the right and top spines
 meow.spines.right.set_visible(False)
 meow.spines.top.set_visible(False)
@@ -37,6 +45,15 @@ start, end = meow.get_ylim()
 meow.yaxis.set_ticks(np.arange(int(start), int(end), 1))
 meow.yaxis.set_major_formatter(ticker.FormatStrFormatter('%0.1f'))
 
+#xstart, xend = meow.get_xlim()
+#meow.xaxis.set_ticks(np.arange(xstart, xend+1, 1))
+#meow.xaxis.set_major_formatter(ticker.FormatStrFormatter('%d'))
+
+#y = range(len(x)) # many thanks to Kyss Tao for setting me straight here
+#plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%d %H'))
+#plt.gca().xaxis.set_major_locator(mdates.DayLocator())
+plt.gcf().autofmt_xdate()
+
 # Disjoin bottom / left spines by moving them outwards
 for s in ['bottom', 'left']: meow.spines[s].set_position(('outward', 12))
 
@@ -49,6 +66,9 @@ plt.ylabel('温\n度\n℃',fontproperties=fp_label, rotation=0, ha='right', labe
 plt.xlabel('日時',fontproperties=fp_label)
 plt.xticks(rotation = 45, ha = 'right')
 plt.tight_layout()
+
+#meow.xaxis.set_major_locator(mdates.HourLocator(interval=10))   #to get a tick every 15 minutes
+#meow.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d %H:00'))     #optional formatting 
 
 #the following section has no effect for some reason, seaborn theme interfering?
 plt.rcParams.update({
