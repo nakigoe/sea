@@ -62,7 +62,7 @@ graph.xaxis_date()
 xstart = 0
 xend=total_hours
 graph.xaxis.set_ticks(np.arange(xstart, xend+1, 1))
-graph.set_xticklabels(sea['日時'])
+graph.set_xticklabels(sea['日時'].str[5:])
 #graph.xaxis.set_major_formatter(ticker.FormatStrFormatter('%m-%d %H'))
 
 #graph.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d %H'))
