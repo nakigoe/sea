@@ -1,6 +1,7 @@
 #Three lines to make our compiler able to draw:
 import sys
 import matplotlib as mpl
+import datetime as dt
 from datetime import datetime, timedelta
 from matplotlib.font_manager import FontProperties
 
@@ -9,19 +10,20 @@ import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.ticker as ticker
 import matplotlib.dates as mdates
-import datetime as dt
+
+mpl.rc('font', family='MS Gothic')
 
 # explore seaborn vs plt.rcParams:
 #import seaborn as sns
 #sns.set_theme(style="darkgrid")
 
-cmap = mpl.cm.plasma #Color map for the temperature graph not working yet 
-sea = pd.read_csv('./input/raw_data.csv')
+cmap = mpl.cm.plasma #Color map for the temperature is too wide, narrow to the temperature 4-30 (water temperature)
+reveresd_sea = pd.read_csv('./input/raw_data.csv')
 
 #custom_date_parser = lambda x: datetime.strptime(x, "%Y/%m/%d %H:%M")
 #sea = pd.read_csv('./input/raw_data.csv', parse_dates=['日時'], date_parser=custom_date_parser)
-
-x = sea['日時'] = pd.to_datetime(sea['日時'], format = '%Y/%m/%d %H:%M')
+sea = reveresd_sea.iloc[::-1]
+#x = pd.to_datetime(sea['日時'], format = '%Y/%m/%d %H:%M')
 
 #display dataframe in conslole, remove when converting for production :
 pd.set_option('display.max_columns', None)
@@ -30,32 +32,50 @@ print(sea)
 
 #as a variant: yticks=[10,12,14,16,18,20,22,24,26,28,30],
 
-meow = sea.plot(kind = 'line', x = '日時', y = '温度', legend=False, figsize=(12, 6.75), colormap=cmap, marker = 'o', clip_on=False, ms = 8, mec = 'b', mfc = '#4CAF80', lw=2) #figsize: size in inches
+graph = sea.plot(kind = 'line', x = '日時', y = '温度', legend=False, figsize=(12, 6.75), colormap=cmap, marker = 'o', clip_on=False, ms = 8, mec = 'b', mfc = '#4CAF80', lw=2) #figsize: size in inches
 
 # Hide the right and top spines
-meow.spines.right.set_visible(False)
-meow.spines.top.set_visible(False)
+graph.spines.right.set_visible(False)
+graph.spines.top.set_visible(False)
 
 # Only show ticks on the left and bottom spines
-meow.yaxis.set_ticks_position('left')
-meow.xaxis.set_ticks_position('bottom')
+graph.yaxis.set_ticks_position('left')
+graph.xaxis.set_ticks_position('bottom')
 
 #y ticks step:
-start, end = meow.get_ylim()
-meow.yaxis.set_ticks(np.arange(int(start), int(end), 1))
-meow.yaxis.set_major_formatter(ticker.FormatStrFormatter('%0.1f'))
+start, end = graph.get_ylim()
+graph.yaxis.set_ticks(np.arange(int(start), int(end), 1))
+graph.yaxis.set_major_formatter(ticker.FormatStrFormatter('%0.1f'))
 
-#xstart, xend = meow.get_xlim()
-#meow.xaxis.set_ticks(np.arange(xstart, xend+1, 1))
-#meow.xaxis.set_major_formatter(ticker.FormatStrFormatter('%d'))
+#--------------------------x-axis formatting--------------------------
+x = pd.to_datetime(sea['日時'], format = '%Y/%m/%d %H:%M')
+total_hours = round((x.iloc[-1]-x.iloc[0]).total_seconds() / 3600)
+
+#graph.xaxis.set(major_locator=mpl.ticker.MultipleLocator(2))
+
+#sea['x軸位置'] = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]
+#graph.set_xticks(sea_label['x軸位置'])
+#plt.locator_params(axis='x', nbins=total_hours)
+#graph.set_xticklabels(sea['日時'].str[5:])
+
+graph.xaxis_date()
+xstart = 0
+xend=total_hours
+graph.xaxis.set_ticks(np.arange(xstart, xend+1, 1))
+graph.set_xticklabels(sea['日時'])
+#graph.xaxis.set_major_formatter(ticker.FormatStrFormatter('%m-%d %H'))
+
+#graph.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d %H'))
+#graph.xaxis.set_major_formatter(ticker.FormatStrFormatter('%Y-%m-%d %H'))
 
 #y = range(len(x)) # many thanks to Kyss Tao for setting me straight here
-#plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%d %H'))
+#plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d %H'))
 #plt.gca().xaxis.set_major_locator(mdates.DayLocator())
 plt.gcf().autofmt_xdate()
+#-------------------------end of x-axis formatting---------------------
 
 # Disjoin bottom / left spines by moving them outwards
-for s in ['bottom', 'left']: meow.spines[s].set_position(('outward', 12))
+for s in ['bottom', 'left']: graph.spines[s].set_position(('outward', 12))
 
 #plot formatting:
 fp = FontProperties(fname='./fonts/msgothic.ttc', size=19)
@@ -63,12 +83,15 @@ fp_label = FontProperties(fname='./fonts/msgothic.ttc', size=15)
 
 plt.title("高知県の水産業の温度[℃]",fontproperties=fp)
 plt.ylabel('温\n度\n℃',fontproperties=fp_label, rotation=0, ha='right', labelpad=13)
-plt.xlabel('日時',fontproperties=fp_label)
+
+year = x.iloc[-1].strftime("%Y")
+plt.xlabel('日時'+ year +'年',fontproperties=fp_label)
+
 plt.xticks(rotation = 45, ha = 'right')
 plt.tight_layout()
 
-#meow.xaxis.set_major_locator(mdates.HourLocator(interval=10))   #to get a tick every 15 minutes
-#meow.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d %H:00'))     #optional formatting 
+#graph.xaxis.set_major_locator(mdates.HourLocator(interval=10))   #to get a tick every 15 minutes
+#graph.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d %H:00'))     #optional formatting 
 
 #the following section has no effect for some reason, seaborn theme interfering?
 plt.rcParams.update({
