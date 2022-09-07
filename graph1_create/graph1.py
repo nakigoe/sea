@@ -89,10 +89,9 @@ def make_graph1():
     #saving
     tr = datetime.utcnow() + timedelta(milliseconds=0.5) #correct time rounding trick
     timestr = tr.strftime("%Y%m%d%H%M%S%f")[:-3]
-    #plt.savefig("./output/graph1_" + timestr + ".svg", format="svg", dpi=360)
+    plt.savefig("./output/graph1_" + timestr + ".svg", format="svg", dpi=360)
 
-    #comment the following section out when moving the project to production:
-    plt.show()
+    #plt.show()
 
 make_graph1()
 
