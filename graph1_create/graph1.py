@@ -62,7 +62,14 @@ graph.xaxis_date()
 xstart = 0
 xend=total_hours
 graph.xaxis.set_ticks(np.arange(xstart, xend+1, 1))
-graph.set_xticklabels(sea['日時'].str[5:])
+#sea['month_day_hour']=sea['日時'].str[5:]
+#firstslash=sea['month_day_hour'].str.find('/')
+#sea['month']=sea['month_day_hour'].str[:firstslash]
+#day_hour=month_day_hour[1]['日時'].split(' ')
+#day=day_hour[0]
+#hour=day_hour[1]
+graph.set_xticklabels(sea['日時'].str[5:].str.replace('/','月').str.replace(' ','日 '))
+#graph.set_xticklabels(sea['month']+'月')#+day['日時']+'日 '+hour['日時'])
 #graph.xaxis.set_major_formatter(ticker.FormatStrFormatter('%m-%d %H'))
 
 #graph.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d %H'))
@@ -93,7 +100,6 @@ plt.tight_layout()
 #graph.xaxis.set_major_locator(mdates.HourLocator(interval=10))   #to get a tick every 15 minutes
 #graph.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d %H:00'))     #optional formatting 
 
-#the following section has no effect for some reason, seaborn theme interfering?
 plt.rcParams.update({
     'font.size': 12,
     'axes.edgecolor': 'gray',
@@ -123,9 +129,4 @@ plt.savefig("./output/graph1_" + timestr + ".svg", format="svg", dpi=360)
 
 #comment the following section out when moving the project to production:
 plt.show()
-#Two  lines to make our compiler able to draw:
-plt.savefig(sys.stdout.buffer)
-sys.stdout.flush()
-
-#in the plan: find max, min temperature values to adopt vertical limits
 
