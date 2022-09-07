@@ -1,7 +1,7 @@
-#Three lines to make our compiler able to draw:
-import sys
+#import datetime as dt
+#import matplotlib.dates as mdates
+
 import matplotlib as mpl
-import datetime as dt
 from datetime import datetime, timedelta
 from matplotlib.font_manager import FontProperties
 
@@ -9,7 +9,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.ticker as ticker
-import matplotlib.dates as mdates
 
 mpl.rc('font', family='MS Gothic')
 
@@ -45,7 +44,7 @@ graph.xaxis.set_ticks_position('bottom')
 #y ticks step:
 start, end = graph.get_ylim()
 #compensate y label for the upper limit:
-print(end)
+#print(end)
 if end-int(end) < 0.25:
     end+=1
 else: 
@@ -135,5 +134,5 @@ timestr = tr.strftime("%Y%m%d%H%M%S%f")[:-3]
 plt.savefig("./output/graph1_" + timestr + ".svg", format="svg", dpi=360)
 
 #comment the following section out when moving the project to production:
-plt.show()
+#plt.show()
 
