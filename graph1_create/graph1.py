@@ -1,6 +1,3 @@
-#import datetime as dt
-#import matplotlib.dates as mdates
-
 import matplotlib as mpl
 from datetime import datetime, timedelta
 from matplotlib.font_manager import FontProperties
