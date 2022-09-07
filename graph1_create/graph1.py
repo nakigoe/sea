@@ -11,26 +11,11 @@ import numpy as np
 import matplotlib.ticker as ticker
 
 def make_graph1():
-    mpl.rc('font', family='MS Gothic')
 
-    # explore seaborn vs plt.rcParams:
-    #import seaborn as sns
-    #sns.set_theme(style="darkgrid")
-
-    cmap = mpl.cm.plasma #Color map for the temperature is too wide, narrow to the temperature of 4-30 (water temperature)
-    reveresd_sea = pd.read_csv('./input/raw_data.csv')
-
-    #custom_date_parser = lambda x: datetime.strptime(x, "%Y/%m/%d %H:%M")
-    #sea = pd.read_csv('./input/raw_data.csv', parse_dates=['日時'], date_parser=custom_date_parser)
+    reveresd_sea = pd.read_csv('./input/raw_data.csv') #the original data comes in the reversed order, inverse:
     sea = reveresd_sea.iloc[::-1]
-    #x = pd.to_datetime(sea['日時'], format = '%Y/%m/%d %H:%M')
 
-    #display dataframe in conslole, remove when converting for production :
-    #pd.set_option('display.max_columns', None)
-    #sea.head()
-    #print(sea)
-
-    #as a variant: yticks=[10,12,14,16,18,20,22,24,26,28,30],
+    cmap = mpl.cm.plasma #Default 'plasma' color map is too wide, narrow to the temperature of 4-30 (sea temperature)
 
     graph = sea.plot(kind = 'line', x = '日時', y = '温度', legend=False, figsize=(12, 6.75), colormap=cmap, marker = 'o', clip_on=False, ms = 8, mec = 'b', mfc = '#4CAF80', lw=2) #figsize: size in inches
 
@@ -44,8 +29,7 @@ def make_graph1():
 
     #y ticks step:
     start, end = graph.get_ylim()
-    #compensate y label for the upper limit:
-    #print(end)
+    #compensate y label for the upper limit, test it with: print(end)
     if end-int(end) < 0.25:
         end+=1
     else: 
@@ -58,35 +42,12 @@ def make_graph1():
     x = pd.to_datetime(sea['日時'], format = '%Y/%m/%d %H:%M')
     total_hours = round((x.iloc[-1]-x.iloc[0]).total_seconds() / 3600)
 
-    #graph.xaxis.set(major_locator=mpl.ticker.MultipleLocator(2))
-
-    #sea['x軸位置'] = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]
-    #graph.set_xticks(sea_label['x軸位置'])
-    #plt.locator_params(axis='x', nbins=total_hours)
-    #graph.set_xticklabels(sea['日時'].str[5:])
-
     graph.xaxis_date()
     xstart = 0
     xend=total_hours
     graph.xaxis.set_ticks(np.arange(xstart, xend+1, 1))
-    #sea['month_day_hour']=sea['日時'].str[5:]
-    #firstslash=sea['month_day_hour'].str.find('/')
-    #sea['month']=sea['month_day_hour'].str[:firstslash]
-    #day_hour=month_day_hour[1]['日時'].split(' ')
-    #day=day_hour[0]
-    #hour=day_hour[1]
     graph.set_xticklabels(sea['日時'].str[5:].str.replace('/','月').str.replace(' ','日 '))
-    #graph.set_xticklabels(sea['month']+'月')#+day['日時']+'日 '+hour['日時'])
-    #graph.xaxis.set_major_formatter(ticker.FormatStrFormatter('%m-%d %H'))
-
-    #graph.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d %H'))
-    #graph.xaxis.set_major_formatter(ticker.FormatStrFormatter('%Y-%m-%d %H'))
-
-    #y = range(len(x)) # many thanks to Kyss Tao for setting me straight here
-    #plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d %H'))
-    #plt.gca().xaxis.set_major_locator(mdates.DayLocator())
     plt.gcf().autofmt_xdate()
-    #-------------------------end of x-axis formatting---------------------
 
     # Disjoin bottom / left spines by moving them outwards
     for s in ['bottom', 'left']: graph.spines[s].set_position(('outward', 12))
@@ -104,8 +65,7 @@ def make_graph1():
     plt.xticks(rotation = 45, ha = 'right')
     plt.tight_layout()
 
-    #graph.xaxis.set_major_locator(mdates.HourLocator(interval=10))   #to get a tick every 15 minutes
-    #graph.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d %H:00'))     #optional formatting 
+    mpl.rc('font', family='MS Gothic')
 
     plt.rcParams.update({
         'font.size': 12,
@@ -136,6 +96,6 @@ def make_graph1():
 
     #comment the following section out when moving the project to production:
     #plt.show()
-    
+
 make_graph1()
 
