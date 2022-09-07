@@ -25,9 +25,9 @@ sea = reveresd_sea.iloc[::-1]
 #x = pd.to_datetime(sea['日時'], format = '%Y/%m/%d %H:%M')
 
 #display dataframe in conslole, remove when converting for production :
-pd.set_option('display.max_columns', None)
-sea.head()
-print(sea)
+#pd.set_option('display.max_columns', None)
+#sea.head()
+#print(sea)
 
 #as a variant: yticks=[10,12,14,16,18,20,22,24,26,28,30],
 
