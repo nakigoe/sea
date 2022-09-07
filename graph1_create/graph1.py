@@ -92,7 +92,7 @@ plt.title("高知県の水産業の温度[℃]",fontproperties=fp)
 plt.ylabel('温\n度\n℃',fontproperties=fp_label, rotation=0, ha='right', labelpad=13)
 
 year = x.iloc[-1].strftime("%Y")
-plt.xlabel('日時'+ year +'年',fontproperties=fp_label)
+plt.xlabel('日時'+ year +'年',fontproperties=fp_label, labelpad=10)
 
 plt.xticks(rotation = 45, ha = 'right')
 plt.tight_layout()
@@ -117,7 +117,7 @@ plt.rcParams.update({
     'xtick.major.pad': 15,
     'xtick.minor.pad': 15,
     'ytick.major.pad': 15,
-    'ytick.minor.pad': 15,
+    'ytick.minor.pad': 15
     })
 
 plt.grid(axis = 'y', color = 'grey', linewidth = 0.334)
