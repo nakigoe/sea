@@ -9,6 +9,8 @@ import matplotlib.ticker as ticker
 
 def make_graph1():
 
+    mpl.rc('font', family='MS Gothic')
+
     reveresd_sea = pd.read_csv('./input/raw_data.csv') #the original data comes in the reversed order, inverse:
     sea = reveresd_sea.iloc[::-1]
 
@@ -26,8 +28,8 @@ def make_graph1():
 
     #y ticks step:
     start, end = graph.get_ylim()
-    #compensate y label for the upper limit, test it with: print(end)
-    if end-int(end) < 0.25:
+    #compensate y label for the upper limit
+    if end-int(end) < 0.25 and abs(start-end)>2:
         end+=1
     else: 
         end+=2
@@ -62,8 +64,6 @@ def make_graph1():
     plt.xticks(rotation = 45, ha = 'right')
     plt.tight_layout()
 
-    mpl.rc('font', family='MS Gothic')
-
     plt.rcParams.update({
         'font.size': 12,
         'axes.edgecolor': 'gray',
@@ -89,10 +89,10 @@ def make_graph1():
     #saving
     tr = datetime.utcnow() + timedelta(milliseconds=0.5) #correct time rounding trick
     timestr = tr.strftime("%Y%m%d%H%M%S%f")[:-3]
-    plt.savefig("./output/graph1_" + timestr + ".svg", format="svg", dpi=360)
+    #plt.savefig("./output/graph1_" + timestr + ".svg", format="svg", dpi=360)
 
     #comment the following section out when moving the project to production:
-    #plt.show()
+    plt.show()
 
 make_graph1()
 
