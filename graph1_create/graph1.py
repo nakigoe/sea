@@ -44,6 +44,13 @@ graph.xaxis.set_ticks_position('bottom')
 
 #y ticks step:
 start, end = graph.get_ylim()
+#compensate y label for the upper limit:
+print(end)
+if end-int(end) < 0.25:
+    end+=1
+else: 
+    end+=2
+
 graph.yaxis.set_ticks(np.arange(int(start), int(end), 1))
 graph.yaxis.set_major_formatter(ticker.FormatStrFormatter('%0.1f'))
 
@@ -88,7 +95,7 @@ for s in ['bottom', 'left']: graph.spines[s].set_position(('outward', 12))
 fp = FontProperties(fname='./fonts/msgothic.ttc', size=19)
 fp_label = FontProperties(fname='./fonts/msgothic.ttc', size=15)
 
-plt.title("高知県の水産業の温度[℃]",fontproperties=fp)
+plt.title("高知県の水産業の温度[℃]",fontproperties=fp,pad=13)
 plt.ylabel('温\n度\n℃',fontproperties=fp_label, rotation=0, ha='right', labelpad=13)
 
 year = x.iloc[-1].strftime("%Y")
