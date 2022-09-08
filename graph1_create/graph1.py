@@ -20,7 +20,7 @@ def make_graph1():
 
     cmap = mpl.cm.plasma #Default 'plasma' color map is too wide, narrow to the temperature of 4-30 (sea temperature)
 
-    graph = sea.plot(kind = 'line', x = '日時', y = '温度', legend=False, figsize=(12, 6.75), colormap=cmap, marker = 'o', clip_on=False, ms = 8, mec = 'b', mfc = '#4CAF80', lw=2) #figsize: size in inches
+    graph = sea.plot(kind = 'line', x = '日時', y = '温度', legend=False, figsize=(12, 6.75), colormap=cmap, marker = 'o', clip_on=False, ms = 8, mec = 'b', mfc = '#4CAF80', lw=2, rasterized=False) #figsize: size in inches
 
     # Hide the right and top spines
     graph.spines.right.set_visible(False)
@@ -38,7 +38,7 @@ def make_graph1():
     else: 
         end+=2
 
-    #or you can set the lowest possible sea temperature manually, like it is done now in 2022 by my client's request, you can safely remove the following line to set the lowest temperature automatically:
+    #or you can set the lowest possible sea temperature manually, like it is done now in 2022 by my client's request. You can safely remove the following line to set the lowest temperature automatically:
     start=10
 
     graph.yaxis.set_ticks(np.arange(int(start), int(end), 1))
@@ -69,7 +69,8 @@ def make_graph1():
     year = x.iloc[-1].strftime("%Y")
     plt.xlabel('日時'+ year +'年',fontproperties=fp_label, labelpad=10)
 
-    plt.tight_layout()
+    #outer margins:
+    plt.tight_layout(rect=[1, 1, 1, 1], h_pad=16, w_pad=9)
 
     plt.rcParams.update({
         'font.size': 12,
@@ -97,8 +98,8 @@ def make_graph1():
     #saving
     tr = datetime.utcnow() + timedelta(milliseconds=0.5) #correct time rounding trick
     timestr = tr.strftime("%Y%m%d%H%M%S%f")[:-3]
-    #plt.savefig("./output/graph1_" + timestr + ".svg", format="svg", dpi=360)
+    plt.savefig("./output/graph1_" + timestr + ".svg", format="svg", dpi=360)
 
-    plt.show()
+    #plt.show()
 
 make_graph1()
