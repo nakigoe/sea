@@ -1,3 +1,6 @@
+#code by Maxim Angel, email: teachermaxim@gmail.com
+#you can submit issues and requests at https://github.com/nakigoe/sea/blob/main/graph1_create/graph1.py
+
 import matplotlib as mpl
 from datetime import datetime, timedelta
 from matplotlib.font_manager import FontProperties
@@ -34,6 +37,9 @@ def make_graph1():
     else: 
         end+=2
 
+    #or you can set the start manually, like it is done now in 2022 by my client's request:
+    start=10
+    
     graph.yaxis.set_ticks(np.arange(int(start), int(end), 1))
     graph.yaxis.set_major_formatter(ticker.FormatStrFormatter('%0.1f'))
 
@@ -45,7 +51,8 @@ def make_graph1():
     xstart = 0
     xend=total_hours
     graph.xaxis.set_ticks(np.arange(xstart, xend+1, 1))
-    graph.set_xticklabels(sea['日時'].str[5:].str.replace('/','月').str.replace(' ','日 '))
+    graph.set_xticklabels(sea['日時'].str[5:].str.replace(' ','\n')) #an alternative is to rotate 45 deg and to use: .str.replace('/','月').str.replace(' ','日\n'))
+    #plt.xticks(rotation = 45, ha = 'right')
     plt.gcf().autofmt_xdate()
 
     # Disjoin bottom / left spines by moving them outwards
@@ -61,7 +68,6 @@ def make_graph1():
     year = x.iloc[-1].strftime("%Y")
     plt.xlabel('日時'+ year +'年',fontproperties=fp_label, labelpad=10)
 
-    plt.xticks(rotation = 45, ha = 'right')
     plt.tight_layout()
 
     plt.rcParams.update({
@@ -85,12 +91,13 @@ def make_graph1():
         })
 
     plt.grid(axis = 'y', color = 'grey', linewidth = 0.334)
+    plt.grid(axis = 'x', color = 'grey', linewidth = 0.25)
 
     #saving
     tr = datetime.utcnow() + timedelta(milliseconds=0.5) #correct time rounding trick
     timestr = tr.strftime("%Y%m%d%H%M%S%f")[:-3]
-    plt.savefig("./output/graph1_" + timestr + ".svg", format="svg", dpi=360)
+    #plt.savefig("./output/graph1_" + timestr + ".svg", format="svg", dpi=360)
 
-    #plt.show()
+    plt.show()
 
 make_graph1()
