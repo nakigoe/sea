@@ -1,4 +1,4 @@
-<h1>高知県の水産業<br>Japan, Fisheries in Kochi Prefecture Sea Temperature Graph</h1>
+<h1>高知県の水産業<br>Japan, Fisheries in Kochi Prefecture, Sea Temperature Graph</h1>
 <br>成果物のディレクトリ構成
 <br>
 
