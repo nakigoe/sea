@@ -59,7 +59,7 @@ def make_graph1():
     # Disjoin bottom / left spines by moving them outwards
     for s in ['bottom', 'left']: graph.spines[s].set_position(('outward', 12))
 
-    #plot formatting:
+    #font formatting:
     fp = FontProperties(fname='./fonts/msgothic.ttc', size=19)
     fp_label = FontProperties(fname='./fonts/msgothic.ttc', size=15)
 
