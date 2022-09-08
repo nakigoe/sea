@@ -10,6 +10,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.ticker as ticker
+import matplotlib.patches as patches
 
 def make_graph1():
 
@@ -19,9 +20,10 @@ def make_graph1():
     sea = reveresd_sea.iloc[::-1]
 
     cmap = mpl.cm.plasma #Default 'plasma' color map is too wide, narrow to the temperature of 4-30 (sea temperature)
-
-    graph = sea.plot(kind = 'line', x = '日時', y = '温度', legend=False, figsize=(12, 6.75), colormap=cmap, marker = 'o', clip_on=False, ms = 8, mec = 'b', mfc = '#4CAF80', lw=2, rasterized=False) #figsize: size in inches
-
+    
+    #figsize: size in inches
+    graph = sea.plot(kind = 'line', x = '日時', y = '温度', legend=False, figsize=(12, 6.75), colormap=cmap, marker = 'o', clip_on=False, ms = 8, mec = 'b', mfc = '#4CAF80', lw=2, rasterized=False)  
+    
     # Hide the right and top spines
     graph.spines.right.set_visible(False)
     graph.spines.top.set_visible(False)
