@@ -38,7 +38,7 @@ def make_graph1():
     else: 
         end+=2
 
-    #or you can set the lowest possible sea temperature manually, like it is done now in 2022 by my client's request:
+    #or you can set the lowest possible sea temperature manually, like it is done now in 2022 by my client's request, you can safely remove the following line to set the lowest temperature automatically:
     start=10
 
     graph.yaxis.set_ticks(np.arange(int(start), int(end), 1))
