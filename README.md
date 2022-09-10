@@ -7,4 +7,4 @@
 グラフ
 The resulting dynamic graph:
 
-![image](https://github.com/nakigoe/sea/blob/main/graph1_create/output/graph1_20220910120235279.png)
+![image](https://github.com/nakigoe/sea/blob/main/graph1_create/output/graph1_20220910122316527.svg)
