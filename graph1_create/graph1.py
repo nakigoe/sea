@@ -71,8 +71,8 @@ def make_graph1():
     year = x.iloc[-1].strftime("%Y")
     plt.xlabel('日時'+ year +'年',fontproperties=fp_label, labelpad=10)
 
-    #outer margins:
-    plt.tight_layout(rect=[1, 1, 1, 1], h_pad=16, w_pad=9)
+    #outer margins in inches! keep them small!!!:
+    plt.tight_layout(rect=[1, 1, 1, 1], h_pad=0.5, w_pad=0.2)
 
     plt.rcParams.update({
         'font.size': 12,
@@ -100,8 +100,8 @@ def make_graph1():
     #saving
     tr = datetime.utcnow() + timedelta(milliseconds=0.5) #correct time rounding trick
     timestr = tr.strftime("%Y%m%d%H%M%S%f")[:-3]
-    plt.savefig("./output/graph1_" + timestr + ".svg", format="svg", dpi=360)
+    #plt.savefig("./output/graph1_" + timestr + ".svg", format="svg", dpi=360)
 
-    #plt.show()
+    plt.show()
 
 make_graph1()
