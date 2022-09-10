@@ -29,7 +29,7 @@ def make_graph1():
     graph_inner_height_in_onehundredth=1-graph_top_margin-graph_bottom_margin 
 
     graph_width = total_width * graph_inner_width_in_onehundredth #graph width in inches without margins
-    graph_height = total_width * graph_inner_height_in_onehundredth #graph width in inches without margins
+    graph_height = total_height * graph_inner_height_in_onehundredth #graph width in inches without margins
 
     marker_size=min(graph_width, graph_height)
     if marker_size<5: marker_size=5 #minimum marker size for small screens
@@ -103,7 +103,7 @@ def make_graph1():
 
     #font formatting:
     fp = FontProperties(fname='./fonts/msgothic.ttc', size=19)
-    fp_label = FontProperties(fname='./fonts/msgothic.ttc', size=15)
+    fp_label = FontProperties(fname='./fonts/msgothic.ttc', size=16)
 
     plt.title("高知県の水産業の温度[℃]",fontproperties=fp,pad=13)
     plt.ylabel('温\n度\n℃',fontproperties=fp_label, rotation=0, ha='right', labelpad=13)
@@ -112,7 +112,7 @@ def make_graph1():
     plt.xlabel('日時'+ year +'年',fontproperties=fp_label, labelpad=10)
 
     plt.rcParams.update({
-        'font.size': 12,
+        'font.size': 14,
         'axes.edgecolor': 'gray',
         'xtick.color':    'gray',
         'ytick.color':    'gray',
