@@ -13,9 +13,9 @@ import matplotlib.ticker as ticker
 import matplotlib.patches as patches
 
 def make_graph1():#graph size in inches:
-    graph_width=3
+    graph_width=12
     graph_height=3
-    marker_size=min(graph_width, graph_height)
+    marker_size=min(graph_width, graph_height)*1.1
 
     mpl.rc('font', family='MS Gothic')
 
