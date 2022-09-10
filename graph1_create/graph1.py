@@ -9,7 +9,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.ticker as ticker
-import matplotlib.patches as patches
 
 def make_graph1():
     #total graph size with margins in inches:
