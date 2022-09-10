@@ -49,10 +49,12 @@ def make_graph1():
 
     #----------------------- labels frequency section -------------------
     hours_distance=1
-    if graph_width<12: hours_distance=2
-    if graph_width<6: hours_distance=3
-    if graph_width<5: hours_distance=4
-    if graph_width<4: hours_distance=6
+    if graph_width<15: hours_distance=2
+    if graph_width<9: hours_distance=3
+    if graph_width<6: hours_distance=4
+    if graph_width<5: hours_distance=6
+    if graph_width<4: hours_distance=8
+    if graph_width<3: hours_distance=12
     graph.xaxis.set(major_locator=mpl.ticker.MultipleLocator(hours_distance))
 
     celsius_distance=1
