@@ -9,8 +9,8 @@ The resulting dynamic graph1:<br>
 
 ![image](https://github.com/nakigoe/sea/blob/main/graph1_create/output/graph1_20220910145716718.svg)
 
-<p class="center mt2">私のウェブサイトをご覧ください：</p>
-<p class="center mt2">Please cast an eye on my website:</p>
+<p class="margin: 0 auto">私のウェブサイトをご覧ください：</p>
+<p class="margin: 0 auto">Please cast an eye on my website:</p>
 <h1><a href="https://nakigoe.org/ja/" style="background-color: black;" target="_blank">
   <img style="display: block; width: calc(100vw - (100vw - 100%));"
     src="https://nakigoe.org/_IMG/logo.png" 
@@ -37,7 +37,7 @@ The resulting dynamic graph1:<br>
     https://nakigoe.org/_SRC/nakigoe-academy-night-2048.jpg 2048w"
   alt="Nakigoe Academy">
   <img class="blend" style="display: block; width: calc(100vw - (100vw - 100%)); padding-bottom: 0.05em;"
-    src="https://nakigoe.org/_IMG/logo-hot-bevel.jpg" 
+    src="https://nakigoe.org/_IMG/logo-hot-bevel.png" 
     srcset="https://nakigoe.org/_IMG/logo-hot-bevel.jpg 4800w,
       https://nakigoe.org/_SRC/logo-hot-bevel-3840.jpg 3840w,
       https://nakigoe.org/_SRC/logo-hot-bevel-2560.jpg 2560w,
