@@ -13,8 +13,8 @@ import matplotlib.patches as patches
 
 def make_graph1():
     #graph size in inches:
-    graph_width=16
-    graph_height=9
+    graph_width=12
+    graph_height=6.75
     marker_size=min(graph_width, graph_height)
     if marker_size<5: marker_size=5 #minimum marker size for small screens
     if marker_size>8: marker_size=8 #maximum marker size for larger screens
