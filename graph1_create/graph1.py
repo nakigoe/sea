@@ -54,28 +54,28 @@ def make_graph1():#graph size in inches:
     if graph_width<4: hours_distance=6
     graph.xaxis.set(major_locator=mpl.ticker.MultipleLocator(hours_distance))
 
-    celcium_distance=1
-    if graph_height<7: celcium_distance=2
-    if graph_height<6: celcium_distance=3
-    if graph_height<5: celcium_distance=4
-    if graph_height<4: celcium_distance=5
-    if graph_height<3: celcium_distance=6
-    if graph_height<2: celcium_distance=7
-    if graph_height<1: celcium_distance=8
-    graph.yaxis.set(major_locator=mpl.ticker.MultipleLocator(celcium_distance))
+    celsius_distance=1
+    if graph_height<7: celsius_distance=2
+    if graph_height<6: celsius_distance=3
+    if graph_height<5: celsius_distance=4
+    if graph_height<4: celsius_distance=5
+    if graph_height<3: celsius_distance=6
+    if graph_height<2: celsius_distance=7
+    if graph_height<1: celsius_distance=8
+    graph.yaxis.set(major_locator=mpl.ticker.MultipleLocator(celsius_distance))
 
     #y ticks start and end position:
     start, end = graph.get_ylim()
     #compensate y label for the upper limit
     if end-int(end) < 0.25 and abs(start-end)>2:
-        end+=celcium_distance
+        end+=celsius_distance
     else: 
-        end+=2*celcium_distance
+        end+=2*celsius_distance
 
     #or you can set the lowest possible sea temperature manually, like it is done now in 2022 by my client's request. You can safely remove the following line to set the lowest temperature automatically:
     start=10 #that is, 10°C
 
-    graph.yaxis.set_ticks(np.arange(int(start), int(end), celcium_distance))
+    graph.yaxis.set_ticks(np.arange(int(start), int(end), celsius_distance))
     graph.yaxis.set_major_formatter(ticker.FormatStrFormatter('%0.1f'))
 
     # Disjoin bottom / left spines by moving them outwards
@@ -121,7 +121,7 @@ def make_graph1():#graph size in inches:
     #saving
     tr = datetime.utcnow() + timedelta(milliseconds=0.5) #correct time rounding trick
     timestr = tr.strftime("%Y%m%d%H%M%S%f")[:-3]
-    plt.savefig("./output/graph1_" + timestr + ".svg", format="svg", dpi=360)
+    #plt.savefig("./output/graph1_" + timestr + ".svg", format="svg", dpi=360)
 
     plt.show()
 
