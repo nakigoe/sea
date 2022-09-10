@@ -15,7 +15,7 @@ def make_graph1():
     #graph size in inches:
     graph_width=12
     graph_height=3
-    marker_size=min(graph_width, graph_height)*1.15
+    marker_size=min(graph_width, graph_height)*1.2
 
     mpl.rc('font', family='MS Gothic')
 
