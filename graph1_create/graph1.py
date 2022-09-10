@@ -1,6 +1,5 @@
 #code by Maxim Angel, email: teachermaxim@gmail.com
 #You see the latest version at https://github.com/nakigoe/sea/blob/main/graph1_create/graph1.py
-#You can submit issues and requests at GitHub!
 
 import matplotlib as mpl
 from datetime import datetime, timedelta
