@@ -19,11 +19,11 @@ def make_graph1():
     if marker_size<5: marker_size=5 #minimum marker size for small screens
     if marker_size>8: marker_size=8 #maximum marker size for larger screens
 
-    #margins in 0.01s of the plot width and height, that is , take that amount of the whole graph dimensions for margins, [0-1]
-    graph_left_margin=0.03 #left margin is 2.5% of the image size
-    graph_right_margin=0.03 #right margin is 2.5% of the image size
-    graph_top_margin=0.04 #top margin is 2.5% of the image size
-    graph_bottom_margin=0.04 #bottom margin is 2.5% the image size
+    #margins in 0.01 of the plot width and height, that is , take that amount of the whole graph dimensions for margins, [0-1]
+    graph_left_margin=0.03 #left margin is 3% of the image size
+    graph_right_margin=0.03 #right margin is 3% of the image size
+    graph_top_margin=0.04 #top margin is 4% of the image size
+    graph_bottom_margin=0.04 #bottom margin is 4% the image size
 
     graph_inner_width=1-graph_right_margin #inner width is 95%, the right margin is set to 0.05 (5%) automaticallly
     graph_inner_height=1-graph_top_margin #inner height is 95%, the top margin is set to 0.05 (5%) automaticallly
