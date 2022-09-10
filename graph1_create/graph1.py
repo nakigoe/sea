@@ -40,27 +40,32 @@ def make_graph1():
     reveresd_sea = pd.read_csv('./input/raw_data.csv') #the original data comes in the reversed order, inverse:
     sea = reveresd_sea.iloc[::-1]
 
-    cmap = mpl.cm.plasma #Default 'plasma' color map is too wide, narrow to the temperature of 4-30 (sea temperature)
+    #cmap = mpl.cm.plasma #Default 'plasma' color map is too wide, narrow to the temperature of 4-30 (sea temperature)
+    temperature = sea['温度']
+    timeline = sea['日時']
 
-    graph = sea.plot(kind = 'line', x = '日時', y = '温度', legend=False, figsize=(total_width, total_height), colormap=cmap, marker = 'o', clip_on=False, ms = marker_size, mec = 'b', mfc = '#4CAF80', lw=2, rasterized=False)  
+    #------------------------------- black border around the graph -----------------------------------
+    fig = plt.figure(figsize=(total_width, total_height), linewidth=12, edgecolor="#000") 
+    ax = fig.add_subplot()
+    ax.plot(timeline, temperature, '-', marker = 'o', clip_on=False, ms = marker_size, mec = 'b', mfc = '#4CAF80', lw=2, rasterized=False)  
 
     # Hide the right and top spines
-    graph.spines.right.set_visible(False)
-    graph.spines.top.set_visible(False)
+    ax.spines.right.set_visible(False)
+    ax.spines.top.set_visible(False)
 
     # Only show ticks on the left and bottom spines
-    graph.yaxis.set_ticks_position('left')
-    graph.xaxis.set_ticks_position('bottom')
+    ax.yaxis.set_ticks_position('left')
+    ax.xaxis.set_ticks_position('bottom')
 
     #-------------------------- x-axis formatting --------------------------
     x = pd.to_datetime(sea['日時'], format = '%Y/%m/%d %H:%M')
     total_hours = round((x.iloc[-1]-x.iloc[0]).total_seconds() / 3600)
 
-    graph.xaxis_date()
+    ax.xaxis_date()
     xstart = 0
     xend=total_hours
-    graph.xaxis.set_ticks(np.arange(xstart, xend+1, 1))
-    graph.set_xticklabels(sea['日時'].str[5:].str.replace(' ','\n')) #an alternative is to rotate 45 deg and to use: .str.replace('/','月').str.replace(' ','日\n'))
+    ax.xaxis.set_ticks(np.arange(xstart, xend+1, 1))
+    ax.set_xticklabels(sea['日時'].str[5:].str.replace(' ','\n')) #an alternative is to rotate 45 deg and to use: .str.replace('/','月').str.replace(' ','日\n'))
     #plt.xticks(rotation = 45, ha = 'right')
     #plt.gcf().autofmt_xdate() #autorotate the labels if necessary, the angle is set automatically
 
@@ -72,7 +77,7 @@ def make_graph1():
     if graph_width < 5: hours_distance=6
     if graph_width < 4: hours_distance=8
     if graph_width < 3: hours_distance=12
-    graph.xaxis.set(major_locator=mpl.ticker.MultipleLocator(hours_distance))
+    ax.xaxis.set(major_locator=mpl.ticker.MultipleLocator(hours_distance))
 
     celsius_distance=1
     if graph_height < 7: celsius_distance=2
@@ -82,10 +87,10 @@ def make_graph1():
     if graph_height < 3: celsius_distance=6
     if graph_height < 2: celsius_distance=7
     if graph_height < 1: celsius_distance=8
-    graph.yaxis.set(major_locator=mpl.ticker.MultipleLocator(celsius_distance))
+    ax.yaxis.set(major_locator=mpl.ticker.MultipleLocator(celsius_distance))
 
     #---------------- y ticks start and end position -----------------
-    start, end = graph.get_ylim()
+    start, end = ax.get_ylim()
     #compensate y label for the upper limit
     if end-int(end) < 0.25 and abs(start-end)>2:
         end+=celsius_distance
@@ -95,11 +100,11 @@ def make_graph1():
     #or you can set the lowest possible sea temperature manually, like it is done now in 2022 by my client's request. You can safely remove the following line to set the lowest temperature automatically:
     start=10 #that is, 10°C
 
-    graph.yaxis.set_ticks(np.arange(int(start), int(end), celsius_distance))
-    graph.yaxis.set_major_formatter(ticker.FormatStrFormatter('%0.1f'))
+    ax.yaxis.set_ticks(np.arange(int(start), int(end), celsius_distance))
+    ax.yaxis.set_major_formatter(ticker.FormatStrFormatter('%0.1f'))
 
     # Disjoin bottom / left spines by moving them outwards
-    #for s in ['bottom', 'left']: graph.spines[s].set_position(('outward', 12))
+    #for s in ['bottom', 'left']: ax.spines[s].set_position(('outward', 12))
 
     #font formatting:
     fp = FontProperties(fname='./fonts/msgothic.ttc', size=19)
@@ -137,12 +142,12 @@ def make_graph1():
     #outer margins are in percentages! keep them between 0 - 1 !!!:
     plt.tight_layout(rect=[graph_left_margin, graph_bottom_margin, graph_inner_width_in_onehundredth, graph_inner_height_in_onehundredth]) #, h_pad=0.2, w_pad=0.2
 
-    plt.margins(x=0.03)#horizontal margins around the graph itself (the line with dots)
+    plt.margins(x=0.03) #horizontal margins around the graph itself (the line with dots)    
 
     #saving
     tr = datetime.utcnow() + timedelta(milliseconds=0.5) #correct time rounding trick
     timestr = tr.strftime("%Y%m%d%H%M%S%f")[:-3]
-    #plt.savefig("./output/graph1_" + timestr + ".svg", format="svg", dpi=360)
+    plt.savefig("./output/graph1_" + timestr + ".svg", format="svg", dpi=360)
     #plt.savefig("./output/graph1_" + timestr + ".png", format="png", dpi=360) #temporary PNG for easier preveiw for my client, use SVG for production!!!
 
     plt.show()
