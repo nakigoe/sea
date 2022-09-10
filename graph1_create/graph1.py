@@ -12,21 +12,28 @@ import matplotlib.ticker as ticker
 import matplotlib.patches as patches
 
 def make_graph1():
-    #graph size in inches:
-    graph_width=12
-    graph_height=6.75
+    #total graph size with margins in inches:
+    total_width=12
+    total_height=6.75
+
+    #margins in 0.01 of the plot width and height, that is, the dimensions of the whole graph is a number between 0 ~ 1
+    graph_left_margin=0.025 #left margin is 2.5% of the image size
+    graph_right_margin=0.025 #right margin is 2.5% of the image size
+    graph_top_margin=0.03 #top margin is 3% of the image size
+    graph_bottom_margin=0.03 #bottom margin is 3% the image size
+
+    #graph_inner_width_in_onehundredth is a number between 0 ~ 1, graph width in percentages after the margins are subtracted!!!
+    graph_inner_width_in_onehundredth=1-graph_right_margin-graph_left_margin 
+
+    #graph_inner_height_in_onehundredth is a number between 0 ~ 1, graph height in percentages after the margins are subtracted!!!
+    graph_inner_height_in_onehundredth=1-graph_top_margin-graph_bottom_margin 
+
+    graph_width = total_width * graph_inner_width_in_onehundredth #graph width in inches without margins
+    graph_height = total_width * graph_inner_height_in_onehundredth #graph width in inches without margins
+
     marker_size=min(graph_width, graph_height)
     if marker_size<5: marker_size=5 #minimum marker size for small screens
     if marker_size>8: marker_size=8 #maximum marker size for larger screens
-
-    #margins in 0.01 of the plot width and height, that is , take that amount of the whole graph dimensions for margins, [0-1]
-    graph_left_margin=0.03 #left margin is 3% of the image size
-    graph_right_margin=0.03 #right margin is 3% of the image size
-    graph_top_margin=0.04 #top margin is 4% of the image size
-    graph_bottom_margin=0.04 #bottom margin is 4% the image size
-
-    graph_inner_width=1-graph_right_margin #inner width is 95%, the right margin is set to 0.05 (5%) automaticallly
-    graph_inner_height=1-graph_top_margin #inner height is 95%, the top margin is set to 0.05 (5%) automaticallly
 
     mpl.rc('font', family='MS Gothic')
 
@@ -35,7 +42,7 @@ def make_graph1():
 
     cmap = mpl.cm.plasma #Default 'plasma' color map is too wide, narrow to the temperature of 4-30 (sea temperature)
 
-    graph = sea.plot(kind = 'line', x = '日時', y = '温度', legend=False, figsize=(graph_width, graph_height), colormap=cmap, marker = 'o', clip_on=False, ms = marker_size, mec = 'b', mfc = '#4CAF80', lw=2, rasterized=False)  
+    graph = sea.plot(kind = 'line', x = '日時', y = '温度', legend=False, figsize=(total_width, total_height), colormap=cmap, marker = 'o', clip_on=False, ms = marker_size, mec = 'b', mfc = '#4CAF80', lw=2, rasterized=False)  
 
     # Hide the right and top spines
     graph.spines.right.set_visible(False)
@@ -58,26 +65,23 @@ def make_graph1():
     #plt.gcf().autofmt_xdate() #autorotate the labels if necessary, the angle is set automatically
 
     #----------------------- labels frequency section -------------------
-    
-    #graph_inner_width is a number between 0 ~ 1, graph width in percentages after the margins are subtracted!!!
     hours_distance=1
-    if graph_width*graph_inner_width<18: hours_distance=2
-    if graph_width*graph_inner_width<9: hours_distance=3
-    if graph_width*graph_inner_width<6: hours_distance=4
-    if graph_width*graph_inner_width<5: hours_distance=6
-    if graph_width*graph_inner_width<4: hours_distance=8
-    if graph_width*graph_inner_width<3: hours_distance=12
+    if graph_width < 18: hours_distance=2
+    if graph_width < 9: hours_distance=3
+    if graph_width < 6: hours_distance=4
+    if graph_width < 5: hours_distance=6
+    if graph_width < 4: hours_distance=8
+    if graph_width < 3: hours_distance=12
     graph.xaxis.set(major_locator=mpl.ticker.MultipleLocator(hours_distance))
 
-    #graph_inner_height is a number between 0 ~ 1, graph heght in percentages after the margins are subtracted!!!
     celsius_distance=1
-    if graph_height*graph_inner_height<7: celsius_distance=2
-    if graph_height*graph_inner_height<6: celsius_distance=3
-    if graph_height*graph_inner_height<5: celsius_distance=4
-    if graph_height*graph_inner_height<4: celsius_distance=5
-    if graph_height*graph_inner_height<3: celsius_distance=6
-    if graph_height*graph_inner_height<2: celsius_distance=7
-    if graph_height*graph_inner_height<1: celsius_distance=8
+    if graph_height < 7: celsius_distance=2
+    if graph_height < 6: celsius_distance=3
+    if graph_height < 5: celsius_distance=4
+    if graph_height < 4: celsius_distance=5
+    if graph_height < 3: celsius_distance=6
+    if graph_height < 2: celsius_distance=7
+    if graph_height < 1: celsius_distance=8
     graph.yaxis.set(major_locator=mpl.ticker.MultipleLocator(celsius_distance))
 
     #---------------- y ticks start and end position -----------------
@@ -131,13 +135,14 @@ def make_graph1():
     plt.grid(axis = 'x', color = 'grey', linewidth = 0.25)
 
     #outer margins are in percentages! keep them between 0 - 1 !!!:
-    plt.tight_layout(rect=[graph_left_margin, graph_bottom_margin, graph_inner_width, graph_inner_height]) #, h_pad=0.2, w_pad=0.2
+    plt.tight_layout(rect=[graph_left_margin, graph_bottom_margin, graph_inner_width_in_onehundredth, graph_inner_height_in_onehundredth]) #, h_pad=0.2, w_pad=0.2
+
     plt.margins(x=0.03)#horizontal margins around the graph itself (the line with dots)
 
     #saving
     tr = datetime.utcnow() + timedelta(milliseconds=0.5) #correct time rounding trick
     timestr = tr.strftime("%Y%m%d%H%M%S%f")[:-3]
-    plt.savefig("./output/graph1_" + timestr + ".svg", format="svg", dpi=360)
+    #plt.savefig("./output/graph1_" + timestr + ".svg", format="svg", dpi=360)
     #plt.savefig("./output/graph1_" + timestr + ".png", format="png", dpi=360) #temporary PNG for easier preveiw for my client, use SVG for production!!!
 
     plt.show()
