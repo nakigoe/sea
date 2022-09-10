@@ -12,7 +12,8 @@ import numpy as np
 import matplotlib.ticker as ticker
 import matplotlib.patches as patches
 
-def make_graph1():#graph size in inches:
+def make_graph1():
+    #graph size in inches:
     graph_width=12
     graph_height=3
     marker_size=min(graph_width, graph_height)*1.1
@@ -34,7 +35,7 @@ def make_graph1():#graph size in inches:
     graph.yaxis.set_ticks_position('left')
     graph.xaxis.set_ticks_position('bottom')
 
-    #--------------------------x-axis formatting--------------------------
+    #-------------------------- x-axis formatting --------------------------
     x = pd.to_datetime(sea['日時'], format = '%Y/%m/%d %H:%M')
     total_hours = round((x.iloc[-1]-x.iloc[0]).total_seconds() / 3600)
 
@@ -46,7 +47,7 @@ def make_graph1():#graph size in inches:
     #plt.xticks(rotation = 45, ha = 'right')
     #plt.gcf().autofmt_xdate() #autorotate the labels if necessary, the angle is set automatically
 
-    #---------labels frequency section---------
+    #----------------------- labels frequency section -------------------
     hours_distance=1
     if graph_width<12: hours_distance=2
     if graph_width<6: hours_distance=3
@@ -64,7 +65,7 @@ def make_graph1():#graph size in inches:
     if graph_height<1: celsius_distance=8
     graph.yaxis.set(major_locator=mpl.ticker.MultipleLocator(celsius_distance))
 
-    #y ticks start and end position:
+    #---------------- y ticks start and end position -----------------
     start, end = graph.get_ylim()
     #compensate y label for the upper limit
     if end-int(end) < 0.25 and abs(start-end)>2:
