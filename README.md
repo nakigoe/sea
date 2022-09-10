@@ -4,3 +4,7 @@
 
 ![image](https://user-images.githubusercontent.com/35993388/189107615-9e2c7483-24c0-4a48-bbf9-d84c6c0be8f3.png)
 
+グラフ
+The resulting dynamic graph:
+
+![image](https://github.com/nakigoe/sea/blob/main/graph1_create/output/graph1_20220910120235279.png)
