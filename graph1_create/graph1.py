@@ -12,7 +12,10 @@ import numpy as np
 import matplotlib.ticker as ticker
 import matplotlib.patches as patches
 
-def make_graph1():
+def make_graph1():#graph size in inches:
+    graph_width=3
+    graph_height=3
+    marker_size=min(graph_width, graph_height)
 
     mpl.rc('font', family='MS Gothic')
 
@@ -20,9 +23,8 @@ def make_graph1():
     sea = reveresd_sea.iloc[::-1]
 
     cmap = mpl.cm.plasma #Default 'plasma' color map is too wide, narrow to the temperature of 4-30 (sea temperature)
-    
-    #figsize: size in inches
-    graph = sea.plot(kind = 'line', x = '日時', y = '温度', legend=False, figsize=(12, 6.75), colormap=cmap, marker = 'o', clip_on=False, ms = 8, mec = 'b', mfc = '#4CAF80', lw=2, rasterized=False)  
+
+    graph = sea.plot(kind = 'line', x = '日時', y = '温度', legend=False, figsize=(graph_width, graph_height), colormap=cmap, marker = 'o', clip_on=False, ms = marker_size, mec = 'b', mfc = '#4CAF80', lw=2, rasterized=False)  
     
     # Hide the right and top spines
     graph.spines.right.set_visible(False)
@@ -31,20 +33,6 @@ def make_graph1():
     # Only show ticks on the left and bottom spines
     graph.yaxis.set_ticks_position('left')
     graph.xaxis.set_ticks_position('bottom')
-
-    #y ticks step:
-    start, end = graph.get_ylim()
-    #compensate y label for the upper limit
-    if end-int(end) < 0.25 and abs(start-end)>2:
-        end+=1
-    else: 
-        end+=2
-
-    #or you can set the lowest possible sea temperature manually, like it is done now in 2022 by my client's request. You can safely remove the following line to set the lowest temperature automatically:
-    start=10
-
-    graph.yaxis.set_ticks(np.arange(int(start), int(end), 1))
-    graph.yaxis.set_major_formatter(ticker.FormatStrFormatter('%0.1f'))
 
     #--------------------------x-axis formatting--------------------------
     x = pd.to_datetime(sea['日時'], format = '%Y/%m/%d %H:%M')
@@ -56,10 +44,42 @@ def make_graph1():
     graph.xaxis.set_ticks(np.arange(xstart, xend+1, 1))
     graph.set_xticklabels(sea['日時'].str[5:].str.replace(' ','\n')) #an alternative is to rotate 45 deg and to use: .str.replace('/','月').str.replace(' ','日\n'))
     #plt.xticks(rotation = 45, ha = 'right')
-    plt.gcf().autofmt_xdate()
+    #plt.gcf().autofmt_xdate() #autorotate the labels if necessary, the angle is set automatically
+
+    #---------labels frequency section---------
+    hours_distance=1
+    if graph_width<12: hours_distance=2
+    if graph_width<6: hours_distance=3
+    if graph_width<5: hours_distance=4
+    if graph_width<4: hours_distance=6
+    graph.xaxis.set(major_locator=mpl.ticker.MultipleLocator(hours_distance))
+
+    celcium_distance=1
+    if graph_height<7: celcium_distance=2
+    if graph_height<6: celcium_distance=3
+    if graph_height<5: celcium_distance=4
+    if graph_height<4: celcium_distance=5
+    if graph_height<3: celcium_distance=6
+    if graph_height<2: celcium_distance=7
+    if graph_height<1: celcium_distance=8
+    graph.yaxis.set(major_locator=mpl.ticker.MultipleLocator(celcium_distance))
+
+    #y ticks start and end position:
+    start, end = graph.get_ylim()
+    #compensate y label for the upper limit
+    if end-int(end) < 0.25 and abs(start-end)>2:
+        end+=celcium_distance
+    else: 
+        end+=2*celcium_distance
+
+    #or you can set the lowest possible sea temperature manually, like it is done now in 2022 by my client's request. You can safely remove the following line to set the lowest temperature automatically:
+    start=10 #that is, 10°C
+
+    graph.yaxis.set_ticks(np.arange(int(start), int(end), celcium_distance))
+    graph.yaxis.set_major_formatter(ticker.FormatStrFormatter('%0.1f'))
 
     # Disjoin bottom / left spines by moving them outwards
-    for s in ['bottom', 'left']: graph.spines[s].set_position(('outward', 12))
+    #for s in ['bottom', 'left']: graph.spines[s].set_position(('outward', 12))
 
     #font formatting:
     fp = FontProperties(fname='./fonts/msgothic.ttc', size=19)
@@ -72,7 +92,8 @@ def make_graph1():
     plt.xlabel('日時'+ year +'年',fontproperties=fp_label, labelpad=10)
 
     #outer margins in inches! keep them small!!!:
-    plt.tight_layout(rect=[1, 1, 1, 1], h_pad=0.5, w_pad=0.2)
+    plt.tight_layout(rect=[0, 0, 1, 1], h_pad=20, w_pad=20)
+    plt.margins(x=0.03)#horizontal margins around the graph itself (the line with dots)
 
     plt.rcParams.update({
         'font.size': 12,
@@ -100,7 +121,7 @@ def make_graph1():
     #saving
     tr = datetime.utcnow() + timedelta(milliseconds=0.5) #correct time rounding trick
     timestr = tr.strftime("%Y%m%d%H%M%S%f")[:-3]
-    #plt.savefig("./output/graph1_" + timestr + ".svg", format="svg", dpi=360)
+    plt.savefig("./output/graph1_" + timestr + ".svg", format="svg", dpi=360)
 
     plt.show()
 
