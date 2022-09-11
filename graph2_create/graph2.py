@@ -45,13 +45,14 @@ def make_graph2():
     sea = reveresd_sea.iloc[::-1]
 
     #cmap = mpl.cm.plasma #Default 'plasma' color map is too wide, narrow to the temperature of 4-30 (sea temperature)
-    temperature = sea['温度']
+    direction = sea['向き[deg]']
+    speed = sea['速さ[m/s]']
     timeline = sea['日時']
 
     #------------------------------- black border around the graph -----------------------------------
     fig = plt.figure(figsize=(total_width, total_height), linewidth=border_width, edgecolor="#000") 
     ax = fig.add_subplot()
-    ax.plot(timeline, temperature, '-', marker = 'o', clip_on=False, ms = marker_size, mec = 'b', mfc = '#4CAF80', lw=2, rasterized=False)  
+    ax.plot(timeline, speed, '-', marker = 'o', clip_on=False, ms = marker_size, mec = 'b', mfc = '#4CAF80', lw=2, rasterized=False)  
 
     # Show the right and top spines
     ax.spines.right.set_visible(True)
@@ -118,7 +119,7 @@ def make_graph2():
     fp_label = FontProperties(fname='../fonts/msgothic.ttc', size=16)
 
     plt.title("高知県の水産業の海の波の向きと大きさ",fontproperties=fp,pad=13)
-    plt.ylabel('↑\nN',fontproperties=fp_label, rotation=0, ha='center', labelpad=13)
+    plt.ylabel('▲\nN',fontproperties=fp_label, rotation=0, ha='center', labelpad=13)
 
     year = x.iloc[-1].strftime("%Y")
     plt.xlabel('日時'+ year +'年',fontproperties=fp_label, labelpad=10)
