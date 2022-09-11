@@ -11,7 +11,7 @@ The resulting dynamic graph1:<br>
 
 <p style="margin: 0 auto" align="center">私のウェブサイトをご覧ください：</p>
 <p style="margin: 0 auto" align="center">Please cast an eye on my website:</p>
-<h1><a href="https://nakigoe.org/ja/" style="background-color: black;" target="_blank">
+<h1><a href="https://nakigoe.org/" style="background-color: black;" target="_blank">
   <img style="display: block; width: calc(100vw - (100vw - 100%));"
     src="https://nakigoe.org/_IMG/logo.png" 
     srcset="https://nakigoe.org/_IMG/logo.png 4800w,
