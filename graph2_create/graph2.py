@@ -7,11 +7,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.ticker as ticker
 import math
+import cmath
+from cmath import rect
 
 from datetime import datetime, timedelta
 from matplotlib.font_manager import FontProperties
 
-from matplotlib.collections import LineCollection
+from matplotlib import collections as mc
 from matplotlib import colors as mcolors
 from cycler import cycler
 
@@ -61,10 +63,54 @@ def make_graph2():
     #------------------------------- black border around the graph -----------------------------------
     fig = plt.figure(figsize=(total_width, total_height), linewidth=border_width, edgecolor="#000") 
     ax = fig.add_subplot()
+    ax.axis('equal') #x and y axes are set here to have the same scale, in order to display the angles correctly
     ax.plot(timeline, np.zeros_like(timeline), "-o", color="k", lw=0.334, markerfacecolor="w")  # Baseline and markers on it.
     #-------------------- waves speed and direction lines ------------------
-    plt.vlines(timeline, 0, speed, colors=['green', 'blue', 'red', '#902000'], lw=5, alpha=0.75)  # The vertical stems.
     
+    #-------------------------- x-axis formatting --------------------------
+    x = pd.to_datetime(sea['日時'], format = '%Y/%m/%d %H:%M')
+    total_hours = round((x.iloc[-1]-x.iloc[0]).total_seconds() / 3600)
+
+    #plt.vlines(timeline, 0, speed, colors=['red','green','blue'], lw=5, alpha=0.5)  # The vertical stems.
+    
+    #--------------- get end point arrays based on speed and direction -----------------
+    # x0 = 0, y0 = 0, add x[i] from the iteration over the lines, that is, real x coordinate for each point is x_end = x_end + x[i]
+    nprect = np.vectorize(rect)
+    c = nprect(speed, np.deg2rad(direction))
+    x_end = c.real
+    y_end = c.imag
+    #twenty_four=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
+    #segments = np.stack((np.c_[twenty_four[:-1],twenty_four[1:]],np.c_[y_end[:-1],y_end[1:]]), axis=2)
+    
+    lines =[[(0, 0), (x_end[0], y_end[0])], 
+            [(1, 0), (x_end[1]+1, y_end[1])], 
+            [(2, 0), (x_end[2]+2, y_end[2])], 
+            [(3, 0), (x_end[3]+3, y_end[3])], 
+            [(4, 0), (x_end[4]+4, y_end[4])], 
+            [(5, 0), (x_end[5]+5, y_end[5])], 
+            [(6, 0), (x_end[6]+6, y_end[6])], 
+            [(7, 0), (x_end[7]+7, y_end[7])], 
+            [(8, 0), (x_end[8]+8, y_end[8])], 
+            [(9, 0), (x_end[9]+9, y_end[9])], 
+            [(10, 0), (x_end[10]+10, y_end[10])], 
+            [(11, 0), (x_end[11]+11, y_end[11])], 
+            [(12, 0), (x_end[12]+12, y_end[12])], 
+            [(13, 0), (x_end[13]+13, y_end[13])], 
+            [(14, 0), (x_end[14]+14, y_end[14])], 
+            [(15, 0), (x_end[15]+15, y_end[15])], 
+            [(16, 0), (x_end[16]+16, y_end[16])], 
+            [(17, 0), (x_end[17]+17, y_end[17])], 
+            [(18, 0), (x_end[18]+18, y_end[18])], 
+            [(19, 0), (x_end[19]+19, y_end[19])], 
+            [(20, 0), (x_end[20]+20, y_end[20])], 
+            [(21, 0), (x_end[21]+21, y_end[21])], 
+            [(22, 0), (x_end[22]+22, y_end[22])], 
+            [(23, 0), (x_end[23]+23, y_end[23])]]
+    print(lines)
+    c = np.array([(1, 0, 0, 0.75), (0, 1, 0, 0.75), (0, 0, 1, 0.75)])
+    lc = mc.LineCollection(lines, colors=c, linewidths=5)
+    ax.add_collection(lc)
+
     # Show the right and top spines
     ax.spines.right.set_visible(True)
     ax.spines.top.set_visible(True)
@@ -72,10 +118,6 @@ def make_graph2():
     # Only show ticks on the left and bottom spines
     ax.yaxis.set_ticks_position('left')
     ax.xaxis.set_ticks_position('bottom')
-
-    #-------------------------- x-axis formatting --------------------------
-    x = pd.to_datetime(sea['日時'], format = '%Y/%m/%d %H:%M')
-    total_hours = round((x.iloc[-1]-x.iloc[0]).total_seconds() / 3600)
 
     ax.xaxis_date()
     xstart = 0
