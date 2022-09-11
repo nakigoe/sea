@@ -101,7 +101,7 @@ def make_graph1():
         end+=2*celsius_distance
 
     #or you can set the lowest possible sea temperature manually, like it is done now in 2022 by my client's request. You can safely remove the following line to set the lowest temperature automatically:
-    start=10 #that is, 10°C
+    if start > 10: start=10 #that is, the client asked to set the lower graph limit to 10°C if the temperature is higher than 10°C
 
     ax.yaxis.set_ticks(np.arange(int(start), int(end), celsius_distance))
     ax.yaxis.set_major_formatter(ticker.FormatStrFormatter('%0.1f'))
