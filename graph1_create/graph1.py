@@ -49,9 +49,9 @@ def make_graph1():
     ax = fig.add_subplot()
     ax.plot(timeline, temperature, '-', marker = 'o', clip_on=False, ms = marker_size, mec = 'b', mfc = '#4CAF80', lw=2, rasterized=False)  
 
-    # Hide the right and top spines
-    ax.spines.right.set_visible(False)
-    ax.spines.top.set_visible(False)
+    # Show the right and top spines
+    ax.spines.right.set_visible(True)
+    ax.spines.top.set_visible(True)
 
     # Only show ticks on the left and bottom spines
     ax.yaxis.set_ticks_position('left')
