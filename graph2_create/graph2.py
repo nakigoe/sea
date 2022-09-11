@@ -52,7 +52,7 @@ def make_graph2():
     #------------------------------- black border around the graph -----------------------------------
     fig = plt.figure(figsize=(total_width, total_height), linewidth=border_width, edgecolor="#000") 
     ax = fig.add_subplot()
-    ax.plot(timeline, speed, '-', marker = 'o', clip_on=False, ms = marker_size, mec = 'b', mfc = '#4CAF80', lw=2, rasterized=False)  
+    ax.stem(timeline, speed, '-')  
 
     # Show the right and top spines
     ax.spines.right.set_visible(True)
