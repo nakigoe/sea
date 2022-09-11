@@ -34,7 +34,12 @@ def make_graph1():
     if marker_size<5: marker_size=5 #minimum marker size for small screens
     if marker_size>8: marker_size=8 #maximum marker size for larger screens
 
-    mpl.rc('font', family='MS Gothic')
+    #outer border, black line, set automatically. Change to manual if necessary.
+    border_width=max(graph_width, graph_height)
+    if border_width<2: border_width=2
+    if border_width>16: border_width=16
+
+    mpl.rc('font', family='MS Gothic', weight='bold')
 
     reveresd_sea = pd.read_csv('./input/raw_data.csv') #the original data comes in the reversed order, inverse:
     sea = reveresd_sea.iloc[::-1]
@@ -44,13 +49,13 @@ def make_graph1():
     timeline = sea['日時']
 
     #------------------------------- black border around the graph -----------------------------------
-    fig = plt.figure(figsize=(total_width, total_height), linewidth=12, edgecolor="#000") 
+    fig = plt.figure(figsize=(total_width, total_height), linewidth=border_width, edgecolor="#000") 
     ax = fig.add_subplot()
     ax.plot(timeline, temperature, '-', marker = 'o', clip_on=False, ms = marker_size, mec = 'b', mfc = '#4CAF80', lw=2, rasterized=False)  
 
     # Hide the right and top spines
-    ax.spines.right.set_visible(False)
-    ax.spines.top.set_visible(False)
+    ax.spines.right.set_visible(True)
+    ax.spines.top.set_visible(True)
 
     # Only show ticks on the left and bottom spines
     ax.yaxis.set_ticks_position('left')
@@ -106,6 +111,8 @@ def make_graph1():
     #for s in ['bottom', 'left']: ax.spines[s].set_position(('outward', 12))
 
     #font formatting:
+    fp_xticklabel=FontProperties(family=['Sans-Serif','Arial', 'Verdana','Helvetica'], weight='semibold', size=12)
+    fp_yticklabel=FontProperties(family=['Sans-Serif', 'Arial', 'Verdana','Helvetica'], weight='semibold', size=12)
     fp = FontProperties(fname='./fonts/msgothic.ttc', size=19)
     fp_label = FontProperties(fname='./fonts/msgothic.ttc', size=16)
 
@@ -114,6 +121,12 @@ def make_graph1():
 
     year = x.iloc[-1].strftime("%Y")
     plt.xlabel('日時'+ year +'年',fontproperties=fp_label, labelpad=10)
+
+    for label in ax.get_xticklabels():
+        label.set_fontproperties(fp_xticklabel)
+
+    for label in ax.get_yticklabels():
+        label.set_fontproperties(fp_yticklabel)
 
     plt.rcParams.update({
         'font.size': 14,
@@ -147,7 +160,7 @@ def make_graph1():
     tr = datetime.utcnow() + timedelta(milliseconds=0.5) #correct time rounding trick
     timestr = tr.strftime("%Y%m%d%H%M%S%f")[:-3]
     plt.savefig("./output/graph1_" + timestr + ".svg", format="svg", dpi=360)
-    #plt.savefig("./output/graph1_" + timestr + ".png", format="png", dpi=360) #temporary PNG for easier preveiw for my client, use SVG for production!!!
+    plt.savefig("./output/graph1_" + timestr + ".png", format="png", dpi=360) #temporary PNG for easier preveiw for my client, use SVG for production!!!
 
     plt.show()
 
