@@ -6,9 +6,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.ticker as ticker
+import math
 
 from datetime import datetime, timedelta
 from matplotlib.font_manager import FontProperties
+
 from matplotlib.collections import LineCollection
 from matplotlib import colors as mcolors
 
@@ -94,10 +96,13 @@ def make_graph2():
     ax.xaxis.set(major_locator=mpl.ticker.MultipleLocator(hours_distance))
 
     #---------------- y ticks start and end position -----------------
-    start, end = ax.get_ylim()
+    yabs_max = abs(max(ax.get_ylim(), key=abs))
+    end = 1.2*yabs_max # a request from the client to increase the grid limit to 1.2 of the original value
+    ax.set_ylim(ymin=-end, ymax=end)
 
     #ax.yaxis.set(major_locator=mpl.ticker.MultipleLocator(celsius_distance))
-    ax.yaxis.set_ticks(np.arange(int(-end*1.2), int(end*1.2), int(end*1.2)))
+    #end = math.ceil(end * 2) / 2 #another request from the client to round to the nearest half
+    #ax.yaxis.set_ticks(np.arange(-end, end, 2))
     ax.yaxis.set_major_formatter(ticker.FormatStrFormatter('%0.1f'))
 
     # Disjoin bottom / left spines by moving them outwards
