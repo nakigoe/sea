@@ -64,8 +64,7 @@ def make_graph2():
     ax.plot(timeline, np.zeros_like(timeline), "-o", color="k", lw=0.334, markerfacecolor="w")  # Baseline and markers on it.
     #-------------------- waves speed and direction lines ------------------
     plt.vlines(timeline, 0, speed, colors=['green', 'blue', 'red', '#902000'], lw=5, alpha=0.75)  # The vertical stems.
-    #plt.vlines.prop_cycle : cycler(color='bgrbgrcmykbgrcmykbgrcmyk')
-
+    
     # Show the right and top spines
     ax.spines.right.set_visible(True)
     ax.spines.top.set_visible(True)
