@@ -118,7 +118,7 @@ def make_graph2():
     fp_label = FontProperties(fname='../fonts/msgothic.ttc', size=16)
 
     plt.title("高知県の水産業の海の波の向きと大きさ",fontproperties=fp,pad=13)
-    plt.ylabel('温\n度\n℃',fontproperties=fp_label, rotation=0, ha='right', labelpad=13)
+    plt.ylabel('▲\nN',fontproperties=fp_label, rotation=0, ha='right', labelpad=13)
 
     year = x.iloc[-1].strftime("%Y")
     plt.xlabel('日時'+ year +'年',fontproperties=fp_label, labelpad=10)
