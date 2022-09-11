@@ -55,7 +55,7 @@ def make_graph2():
     fig = plt.figure(figsize=(total_width, total_height), linewidth=border_width, edgecolor="#000") 
     ax = fig.add_subplot()
     #ax.stem(timeline, speed, '-')  
-    ax.plot(timeline, np.zeros_like(timeline), "-o", color="k", markerfacecolor="w")  # Baseline and markers on it.
+    ax.plot(timeline, np.zeros_like(timeline), "-o", color="k", lw=0.334, markerfacecolor="w")  # Baseline and markers on it.
 
     # Show the right and top spines
     ax.spines.right.set_visible(True)
