@@ -1,5 +1,5 @@
 #code by Maxim Angel, email: teachermaxim@gmail.com
-#You see the latest version at https://github.com/nakigoe/sea/blob/main/graph1_create/graph1.py
+#You see the latest version at https://github.com/nakigoe/sea/blob/main/graph2_create/graph2.py
 
 import matplotlib as mpl
 from datetime import datetime, timedelta
@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.ticker as ticker
 
-def make_graph1():
+def make_graph2():
     #total graph size with margins in inches:
     total_width=12
     total_height=6.75
@@ -117,7 +117,7 @@ def make_graph1():
     fp = FontProperties(fname='../fonts/msgothic.ttc', size=19)
     fp_label = FontProperties(fname='../fonts/msgothic.ttc', size=16)
 
-    plt.title("高知県の水産業の温度[℃]",fontproperties=fp,pad=13)
+    plt.title("高知県の水産業の海の波の向きと大きさ",fontproperties=fp,pad=13)
     plt.ylabel('温\n度\n℃',fontproperties=fp_label, rotation=0, ha='right', labelpad=13)
 
     year = x.iloc[-1].strftime("%Y")
@@ -160,9 +160,9 @@ def make_graph1():
     #saving
     tr = datetime.utcnow() + timedelta(milliseconds=0.5) #correct time rounding trick
     timestr = tr.strftime("%Y%m%d%H%M%S%f")[:-3]
-    #plt.savefig("./output/graph1_" + timestr + ".svg", format="svg", dpi=360)
-    #plt.savefig("./output/graph1_" + timestr + ".png", format="png", dpi=360) #temporary PNG for easier preveiw for my client, use SVG for production!!!
+    #plt.savefig("./output/graph2_" + timestr + ".svg", format="svg", dpi=360)
+    #plt.savefig("./output/graph2_" + timestr + ".png", format="png", dpi=360) #temporary PNG for easier preveiw for my client, use SVG for production!!!
 
     plt.show()
 
-make_graph1()
+make_graph2()
