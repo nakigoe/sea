@@ -153,7 +153,7 @@ def make_graph2():
         'ytick.minor.pad': 15
         })
 
-    plt.grid(axis = 'y', color = 'grey', linewidth = 0.334)
+    #plt.grid(axis = 'y', color = 'grey', linewidth = 0.334)
     plt.grid(axis = 'x', color = 'grey', linewidth = 0.25)
 
     #outer margins are in percentages! keep them between 0 - 1 !!!:
