@@ -12,6 +12,10 @@ from matplotlib.font_manager import FontProperties
 from matplotlib.collections import LineCollection
 from matplotlib import colors as mcolors
 
+import matplotlib.lines as lines
+import matplotlib.transforms as mtransforms
+import matplotlib.text as mtext
+
 def make_graph2():
     #total graph size with margins in inches:
     total_width=12
@@ -47,15 +51,17 @@ def make_graph2():
     sea = reveresd_sea.iloc[::-1]
 
     #cmap = mpl.cm.plasma #Default 'plasma' color map is too wide, narrow to the temperature of 4-30 (sea temperature)
-    direction = sea['向き[deg]']
+    direction = sea['向き[deg]'] #degrees start from the bottom (South) and increase counterclockwise. due South = 0
     speed = sea['速さ[m/s]']
     timeline = sea['日時']
 
     #------------------------------- black border around the graph -----------------------------------
     fig = plt.figure(figsize=(total_width, total_height), linewidth=border_width, edgecolor="#000") 
     ax = fig.add_subplot()
-    #ax.stem(timeline, speed, '-')  
     ax.plot(timeline, np.zeros_like(timeline), "-o", color="k", lw=0.334, markerfacecolor="w")  # Baseline and markers on it.
+
+    #-------------------- waves speed and direction lines ------------------
+    plt.vlines(timeline, 0, speed, color="tab:red")  # The vertical stems.
 
     # Show the right and top spines
     ax.spines.right.set_visible(True)
@@ -87,28 +93,11 @@ def make_graph2():
     if graph_width < 3: hours_distance=12
     ax.xaxis.set(major_locator=mpl.ticker.MultipleLocator(hours_distance))
 
-    celsius_distance=1
-    if graph_height < 7: celsius_distance=2
-    if graph_height < 6: celsius_distance=3
-    if graph_height < 5: celsius_distance=4
-    if graph_height < 4: celsius_distance=5
-    if graph_height < 3: celsius_distance=6
-    if graph_height < 2: celsius_distance=7
-    if graph_height < 1: celsius_distance=8
-    ax.yaxis.set(major_locator=mpl.ticker.MultipleLocator(celsius_distance))
-
     #---------------- y ticks start and end position -----------------
     start, end = ax.get_ylim()
-    #compensate y label for the upper limit
-    if end-int(end) < 0.25 and abs(start-end)>2:
-        end+=celsius_distance
-    else: 
-        end+=2*celsius_distance
 
-    #or you can set the lowest possible sea temperature manually, like it is done now in 2022 by my client's request. You can safely remove the following line to set the lowest temperature automatically:
-    start=10 #that is, 10°C
-
-    ax.yaxis.set_ticks(np.arange(int(start), int(end), celsius_distance))
+    #ax.yaxis.set(major_locator=mpl.ticker.MultipleLocator(celsius_distance))
+    ax.yaxis.set_ticks(np.arange(int(-end*1.2), int(end*1.2), int(end*1.2)))
     ax.yaxis.set_major_formatter(ticker.FormatStrFormatter('%0.1f'))
 
     # Disjoin bottom / left spines by moving them outwards
