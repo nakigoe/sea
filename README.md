@@ -7,7 +7,7 @@
 グラフ１<br>
 The resulting dynamic graph1:<br>
 
-![image](https://github.com/nakigoe/sea/blob/main/graph1_create/output/graph1_20220910145716718.svg)
+![image](https://github.com/nakigoe/sea/blob/main/graph1_create/output/graph1_20220911050443068.svg)
 
 <p style="margin: 0 auto" align="center">私のウェブサイトをご覧ください：</p>
 <p style="margin: 0 auto" align="center">Please cast an eye on my website:</p>
