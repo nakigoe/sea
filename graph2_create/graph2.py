@@ -13,6 +13,7 @@ from matplotlib.font_manager import FontProperties
 
 from matplotlib.collections import LineCollection
 from matplotlib import colors as mcolors
+from cycler import cycler
 
 import matplotlib.lines as lines
 import matplotlib.transforms as mtransforms
@@ -52,7 +53,7 @@ def make_graph2():
     reveresd_sea = pd.read_csv('./input/raw_data.csv') #the original data comes in the reversed order, inverse:
     sea = reveresd_sea.iloc[::-1]
 
-    #cmap = mpl.cm.plasma #Default 'plasma' color map is too wide, narrow to the temperature of 4-30 (sea temperature)
+    #cmap = mpl.cm.plasma 
     direction = sea['向き[deg]'] #degrees start from the bottom (South) and increase counterclockwise. due South = 0
     speed = sea['速さ[m/s]']
     timeline = sea['日時']
@@ -61,9 +62,9 @@ def make_graph2():
     fig = plt.figure(figsize=(total_width, total_height), linewidth=border_width, edgecolor="#000") 
     ax = fig.add_subplot()
     ax.plot(timeline, np.zeros_like(timeline), "-o", color="k", lw=0.334, markerfacecolor="w")  # Baseline and markers on it.
-
     #-------------------- waves speed and direction lines ------------------
-    plt.vlines(timeline, 0, speed, color="tab:red")  # The vertical stems.
+    plt.vlines(timeline, 0, speed, colors=['green', 'blue', 'red', '#902000'], lw=5, alpha=0.75)  # The vertical stems.
+    #plt.vlines.prop_cycle : cycler(color='bgrbgrcmykbgrcmykbgrcmyk')
 
     # Show the right and top spines
     ax.spines.right.set_visible(True)

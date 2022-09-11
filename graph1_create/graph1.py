@@ -44,7 +44,6 @@ def make_graph1():
     reveresd_sea = pd.read_csv('./input/raw_data.csv') #the original data comes in the reversed order, inverse:
     sea = reveresd_sea.iloc[::-1]
 
-    #cmap = mpl.cm.plasma #Default 'plasma' color map is too wide, narrow to the temperature of 4-30 (sea temperature)
     temperature = sea['温度']
     timeline = sea['日時']
 
