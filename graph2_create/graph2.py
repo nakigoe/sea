@@ -2,13 +2,15 @@
 #You see the latest version at https://github.com/nakigoe/sea/blob/main/graph2_create/graph2.py
 
 import matplotlib as mpl
-from datetime import datetime, timedelta
-from matplotlib.font_manager import FontProperties
-
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.ticker as ticker
+
+from datetime import datetime, timedelta
+from matplotlib.font_manager import FontProperties
+from matplotlib.collections import LineCollection
+from matplotlib import colors as mcolors
 
 def make_graph2():
     #total graph size with margins in inches:
@@ -52,7 +54,8 @@ def make_graph2():
     #------------------------------- black border around the graph -----------------------------------
     fig = plt.figure(figsize=(total_width, total_height), linewidth=border_width, edgecolor="#000") 
     ax = fig.add_subplot()
-    ax.stem(timeline, speed, '-')  
+    #ax.stem(timeline, speed, '-')  
+    ax.plot(timeline, np.zeros_like(timeline), "-o", color="k", markerfacecolor="w")  # Baseline and markers on it.
 
     # Show the right and top spines
     ax.spines.right.set_visible(True)
