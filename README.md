@@ -9,7 +9,7 @@
 グラフ１
 <br> 温度[℃]
 <br> Sea Temperature
-The resulting dynamic graph1:<br>
+<br> The resulting dynamic graph1:<br>
 
 ![image](https://github.com/nakigoe/sea/blob/main/graph1_create/output/graph1_20220911050443068.svg)
 
