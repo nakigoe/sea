@@ -41,8 +41,8 @@ def make_graph1():
 
     mpl.rc('font', family='MS Gothic', weight='bold')
 
-    reveresd_sea = pd.read_csv('./input/raw_data.csv') #the original data comes in the reversed order, inverse:
-    sea = reveresd_sea.iloc[::-1]
+    reveresed_sea = pd.read_csv('./input/raw_data.csv') #the original data comes in the reversed order, inverse:
+    sea = reveresed_sea.iloc[::-1]
 
     temperature = sea['温度']
     timeline = sea['日時']
