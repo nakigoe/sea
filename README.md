@@ -20,6 +20,7 @@
 
 ![image](https://github.com/nakigoe/sea/blob/main/graph2_create/output/graph2_20220913043847405.svg)
 
+<hr>
 <p style="margin: 0 auto" align="center">私のウェブサイトをご覧ください：</p>
 <p style="margin: 0 auto" align="center">Please cast an eye on my website:</p>
 <h1><a href="https://nakigoe.org/" style="background-color: black;" target="_blank">
