@@ -56,8 +56,8 @@ def make_graph2():
     sea = reveresd_sea.iloc[::-1]
 
     #cmap = mpl.cm.plasma 
-    direction = sea['向き[deg]'] #degrees start from the bottom (South) and increase counterclockwise. due South = 0
-    speed = sea['速さ[m/s]']
+    direction = sea['向き[deg]'] #degrees start from the bottom (South) and increase counterclockwise. due South = 0. Therefore I subtract 90° from the data in a later section of the code when performing standard trigonometry operations!!!
+    speed = sea['速さ[m/s]'] 
     timeline = sea['日時']
 
     #------------------------------- black border around the graph -----------------------------------
@@ -76,7 +76,7 @@ def make_graph2():
     #--------------- get end point arrays based on speed and direction -----------------
     # x0 = 0, y0 = 0, add x[i] from the iteration over the lines, that is, real x coordinate for each point is x_end = x_end + x[i]
     nprect = np.vectorize(rect)
-    c = nprect(speed, np.deg2rad(direction))
+    c = nprect(speed, np.deg2rad(direction-90)) #I am subtracting 90° from the direction, since the angles in the data start from the South!!!
     x_end = c.real
     y_end = c.imag
     #twenty_four=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
@@ -106,8 +106,13 @@ def make_graph2():
             [(21, 0), (x_end[21]+21, y_end[21])], 
             [(22, 0), (x_end[22]+22, y_end[22])], 
             [(23, 0), (x_end[23]+23, y_end[23])]]
-    print(lines)
-    c = np.array([(1, 0, 0, 0.75), (0, 1, 0, 0.75), (0, 0, 1, 0.75)])
+
+    #an automated alternative:        
+    #lines2=np.array([(0, 0), (0, 0)])
+    #for i in range(total_hours):
+    #   lines2[i]=((i, 0), (x_end[i]+i, y_end[i]))
+
+    c = np.array([(1, 0, 0, 0.75), (0, 1, 0, 0.75), (0, 0, 1, 0.75)]) #colors with opacity 0.75 to see the graph even when the lines overlap
     lc = mc.LineCollection(lines, colors=c, linewidths=5)
     ax.add_collection(lc)
 
