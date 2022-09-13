@@ -1,14 +1,26 @@
-<h1>高知県の水産業<br>Japan, Fisheries in Kochi Prefecture, Sea Temperature Graph</h1>
-<br>成果物のディレクトリ構成
-<br>
+<h1>高知県の水産業<br> 温度[℃]<br> 海の波の向きと大きさ <br>Japan, Fisheries in Kochi Prefecture,<br> Sea Temperature Graph, <br> Sea Waves Speed and Direction</h1>
+
+
+<br> 成果物のディレクトリ構成：
+<br> Folder Structure:
 
 ![image](https://user-images.githubusercontent.com/35993388/189107615-9e2c7483-24c0-4a48-bbf9-d84c6c0be8f3.png)
 
-グラフ１<br>
-The resulting dynamic graph1:<br>
+グラフ１
+<br> 温度[℃]
+<br> Sea Temperature
+<br> The resulting dynamic graph1:<br>
 
 ![image](https://github.com/nakigoe/sea/blob/main/graph1_create/output/graph1_20220911050443068.svg)
 
+グラフ2
+<br> 海の波の向きと大きさ
+<br> Sea Waves Speed and Direction
+<br> The resulting dynamic graph2:
+
+![image](https://github.com/nakigoe/sea/blob/main/graph2_create/output/graph2_20220913043847405.svg)
+
+<hr>
 <p style="margin: 0 auto" align="center">私のウェブサイトをご覧ください：</p>
 <p style="margin: 0 auto" align="center">Please cast an eye on my website:</p>
 <h1><a href="https://nakigoe.org/" style="background-color: black;" target="_blank">
