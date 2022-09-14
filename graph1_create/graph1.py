@@ -61,8 +61,8 @@ def make_graph1():
     ax.xaxis.set_ticks_position('bottom')
 
     #-------------------------- x-axis formatting --------------------------
-    x = pd.to_datetime(sea['日時'], format = '%Y/%m/%d %H:%M')
-    total_hours = round((x.iloc[-1]-x.iloc[0]).total_seconds() / 3600)
+    python_hours_array = pd.to_datetime(sea['日時'], format = '%Y/%m/%d %H:%M')
+    total_hours = round((python_hours_array.iloc[-1] - python_hours_array.iloc[0]).total_seconds() / 3600)
 
     ax.xaxis_date()
     xstart = 0
@@ -119,7 +119,7 @@ def make_graph1():
     plt.title("高知県の水産業の温度[℃]",fontproperties=fp,pad=13)
     plt.ylabel('温\n度\n℃',fontproperties=fp_label, rotation=0, ha='center', labelpad=13)
 
-    year = x.iloc[-1].strftime("%Y")
+    year = python_hours_array.iloc[-1].strftime("%Y") #take the year from the last date entry
     plt.xlabel('日時'+ year +'年',fontproperties=fp_label, labelpad=10)
 
     for label in ax.get_xticklabels():
@@ -159,7 +159,7 @@ def make_graph1():
     #saving
     tr = datetime.utcnow() + timedelta(milliseconds=0.5) #correct time rounding trick
     timestr = tr.strftime("%Y%m%d%H%M%S%f")[:-3]
-    plt.savefig("./output/graph1_" + timestr + ".svg", format="svg", dpi=360)
+    #plt.savefig("./output/graph1_" + timestr + ".svg", format="svg", dpi=360)
     #plt.savefig("./output/graph1_" + timestr + ".png", format="png", dpi=360) #temporary PNG for easier preveiw for my client, use SVG for production!!!
 
     plt.show()
