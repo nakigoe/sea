@@ -1,5 +1,5 @@
 #code by Maxim Angel, email: teachermaxim@gmail.com
-#You see the latest version at https://github.com/nakigoe/sea/blob/main/graph_wind_create/wind.py
+#You can see the latest version at https://github.com/nakigoe/sea/blob/main/graph_wind_create/wind.py
 
 import pandas as pd
 from svgmanip import Element
