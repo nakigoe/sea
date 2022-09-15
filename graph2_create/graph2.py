@@ -73,7 +73,6 @@ def make_graph2():
     #plt.vlines(timeline, 0, speed, colors=['red','green','blue'], lw=5, alpha=0.5)  # The vertical stems.
     
     #--------------- get end point arrays based on speed and direction -----------------
-    # x0 = 0, y0 = 0, add x[i] from the iteration over the lines, that is, real x coordinate for each point is x_end = x_end + x[i]
     nprect = np.vectorize(rect)
     c = nprect(speed, np.deg2rad(direction-90)) #I am subtracting 90° from the direction, since the angles in the data start from the South!!!
     x_end = c.real
@@ -107,8 +106,9 @@ def make_graph2():
 
     #an automated alternative to accommodate any amount of hourly data:        
     lines_array = []
-    for i in range(total_hours):
-       lines_array.append(((i, 0), (x_end[i]+i, y_end[i])))
+    for i in range(total_hours+1):
+        line=((i, 0), (x_end[i]+i, y_end[i])) # x0 = i, y0 = 0, add i to the x[i] from the iteration over the lines to receive the real x coordinate for each end point, that is x_end[i] = i + x[i]
+        lines_array.append(line)
 
     c = np.array([(1, 0, 0, 0.75), (0, 1, 0, 0.75), (0, 0, 1, 0.75)]) #colors with opacity 0.75 to see the graph even when the lines overlap
     lc = mc.LineCollection(lines_array, colors=c, linewidths=5)
@@ -203,7 +203,7 @@ def make_graph2():
     #saving
     tr = datetime.utcnow() + timedelta(milliseconds=0.5) #correct time rounding trick
     timestr = tr.strftime("%Y%m%d%H%M%S%f")[:-3]
-    #plt.savefig("./output/graph2_" + timestr + ".svg", format="svg", dpi=360)
+    plt.savefig("./output/graph2_" + timestr + ".svg", format="svg", dpi=360)
     #plt.savefig("./output/graph2_" + timestr + ".png", format="png", dpi=360) #temporary PNG for easier preveiw for my client, use SVG for production!!!
 
     plt.show()
