@@ -79,7 +79,7 @@ def make_graph2():
     x_end = c.real
     y_end = c.imag
 
-    #-------------------- waves speed and direction lines array structure, by hand: ------------------
+    #-------------------- waves speed and direction lines' array structure, by hand: ------------------
     #lines =[[(0, 0), (x_end[0], y_end[0])], 
     #        [(1, 0), (x_end[1]+1, y_end[1])], 
     #        [(2, 0), (x_end[2]+2, y_end[2])], 
