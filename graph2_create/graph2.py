@@ -65,8 +65,7 @@ def make_graph2():
     ax = fig.add_subplot()
     ax.axis('equal') #x and y axes are set here to have the same scale, in order to display the angles correctly
     ax.plot(timeline, np.zeros_like(timeline), "-o", color="k", lw=0.334, markerfacecolor="w")  # Baseline and markers on it.
-    #-------------------- waves speed and direction lines ------------------
-    
+        
     #-------------------------- x-axis formatting --------------------------
     x = pd.to_datetime(sea['日時'], format = '%Y/%m/%d %H:%M')
     total_hours = round((x.iloc[-1]-x.iloc[0]).total_seconds() / 3600)
@@ -79,41 +78,40 @@ def make_graph2():
     c = nprect(speed, np.deg2rad(direction-90)) #I am subtracting 90° from the direction, since the angles in the data start from the South!!!
     x_end = c.real
     y_end = c.imag
-    #twenty_four=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
-    #segments = np.stack((np.c_[twenty_four[:-1],twenty_four[1:]],np.c_[y_end[:-1],y_end[1:]]), axis=2)
-    
-    lines =[[(0, 0), (x_end[0], y_end[0])], 
-            [(1, 0), (x_end[1]+1, y_end[1])], 
-            [(2, 0), (x_end[2]+2, y_end[2])], 
-            [(3, 0), (x_end[3]+3, y_end[3])], 
-            [(4, 0), (x_end[4]+4, y_end[4])], 
-            [(5, 0), (x_end[5]+5, y_end[5])], 
-            [(6, 0), (x_end[6]+6, y_end[6])], 
-            [(7, 0), (x_end[7]+7, y_end[7])], 
-            [(8, 0), (x_end[8]+8, y_end[8])], 
-            [(9, 0), (x_end[9]+9, y_end[9])], 
-            [(10, 0), (x_end[10]+10, y_end[10])], 
-            [(11, 0), (x_end[11]+11, y_end[11])], 
-            [(12, 0), (x_end[12]+12, y_end[12])], 
-            [(13, 0), (x_end[13]+13, y_end[13])], 
-            [(14, 0), (x_end[14]+14, y_end[14])], 
-            [(15, 0), (x_end[15]+15, y_end[15])], 
-            [(16, 0), (x_end[16]+16, y_end[16])], 
-            [(17, 0), (x_end[17]+17, y_end[17])], 
-            [(18, 0), (x_end[18]+18, y_end[18])], 
-            [(19, 0), (x_end[19]+19, y_end[19])], 
-            [(20, 0), (x_end[20]+20, y_end[20])], 
-            [(21, 0), (x_end[21]+21, y_end[21])], 
-            [(22, 0), (x_end[22]+22, y_end[22])], 
-            [(23, 0), (x_end[23]+23, y_end[23])]]
 
-    #an automated alternative:        
-    #lines2=np.array([(0, 0), (0, 0)])
-    #for i in range(total_hours):
-    #   lines2[i]=((i, 0), (x_end[i]+i, y_end[i]))
+    #-------------------- waves speed and direction lines array structure, by hand: ------------------
+    #lines =[[(0, 0), (x_end[0], y_end[0])], 
+    #        [(1, 0), (x_end[1]+1, y_end[1])], 
+    #        [(2, 0), (x_end[2]+2, y_end[2])], 
+    #        [(3, 0), (x_end[3]+3, y_end[3])], 
+    #        [(4, 0), (x_end[4]+4, y_end[4])], 
+    #        [(5, 0), (x_end[5]+5, y_end[5])], 
+    #        [(6, 0), (x_end[6]+6, y_end[6])], 
+    #        [(7, 0), (x_end[7]+7, y_end[7])], 
+    #        [(8, 0), (x_end[8]+8, y_end[8])], 
+    #        [(9, 0), (x_end[9]+9, y_end[9])], 
+    #        [(10, 0), (x_end[10]+10, y_end[10])], 
+    #        [(11, 0), (x_end[11]+11, y_end[11])], 
+    #        [(12, 0), (x_end[12]+12, y_end[12])], 
+    #        [(13, 0), (x_end[13]+13, y_end[13])], 
+    #        [(14, 0), (x_end[14]+14, y_end[14])], 
+    #        [(15, 0), (x_end[15]+15, y_end[15])], 
+    #        [(16, 0), (x_end[16]+16, y_end[16])], 
+    #        [(17, 0), (x_end[17]+17, y_end[17])], 
+    #        [(18, 0), (x_end[18]+18, y_end[18])], 
+    #        [(19, 0), (x_end[19]+19, y_end[19])], 
+    #        [(20, 0), (x_end[20]+20, y_end[20])], 
+    #        [(21, 0), (x_end[21]+21, y_end[21])], 
+    #        [(22, 0), (x_end[22]+22, y_end[22])], 
+    #        [(23, 0), (x_end[23]+23, y_end[23])]]
+
+    #an automated alternative to accommodate any amount of hourly data:        
+    lines_array = []
+    for i in range(total_hours):
+       lines_array.append(((i, 0), (x_end[i]+i, y_end[i])))
 
     c = np.array([(1, 0, 0, 0.75), (0, 1, 0, 0.75), (0, 0, 1, 0.75)]) #colors with opacity 0.75 to see the graph even when the lines overlap
-    lc = mc.LineCollection(lines, colors=c, linewidths=5)
+    lc = mc.LineCollection(lines_array, colors=c, linewidths=5)
     ax.add_collection(lc)
 
     # Show the right and top spines
@@ -205,7 +203,7 @@ def make_graph2():
     #saving
     tr = datetime.utcnow() + timedelta(milliseconds=0.5) #correct time rounding trick
     timestr = tr.strftime("%Y%m%d%H%M%S%f")[:-3]
-    plt.savefig("./output/graph2_" + timestr + ".svg", format="svg", dpi=360)
+    #plt.savefig("./output/graph2_" + timestr + ".svg", format="svg", dpi=360)
     #plt.savefig("./output/graph2_" + timestr + ".png", format="png", dpi=360) #temporary PNG for easier preveiw for my client, use SVG for production!!!
 
     plt.show()
