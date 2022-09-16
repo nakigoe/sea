@@ -2,7 +2,7 @@
 #You can see the latest version at https://github.com/nakigoe/sea/blob/main/graph_wind_create/wind.py
 
 import pandas as pd
-from svgmanip import Element
+from svgmanip import Element #Python Library from https://github.com/CrazyPython/svgmanip
 
 def make_graph_wind():
     sea = pd.read_csv('input/raw_data.csv')
