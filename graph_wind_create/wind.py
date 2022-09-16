@@ -1,8 +1,20 @@
 #code by Maxim Angel, email: teachermaxim@gmail.com
 #You can see the latest version at https://github.com/nakigoe/sea/blob/main/graph_wind_create/wind.py
+#Python Library from https://github.com/CrazyPython/svgmanip
+#Basic syntaxis:
+#output = Element(384, 356)  # size of the output file, look up the SVG code to get correct proportions!
+
+#map = Element('assets/map.svg').rotate(-15)
+#marker = Element('assets/marker.svg').rotate(-5)
+
+#output.placeat(map, 107.81, 8.76)
+#output.placeat(marker, 170.9, 0.08)
+
+#output.dump('output.svg')
+#output.save_as_png('output.png', 1024)
 
 import pandas as pd
-from svgmanip import Element #Python Library from https://github.com/CrazyPython/svgmanip
+from svgmanip import Element 
 
 def make_graph_wind():
     sea = pd.read_csv('input/raw_data.csv')
