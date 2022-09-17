@@ -2,18 +2,25 @@
 #You can see the latest version at https://github.com/nakigoe/sea/blob/main/graph_wind_create/wind.py
 
 #------ basic usage ------ Python Library from https://github.com/CrazyPython/svgmanip
-#output = Element(384, 356)  # size of the output file, look up the SVG code to get correct proportions!
+'''
+output = Element(384, 356)  # size of the output file, look up the SVG code to get correct proportions!
 
-#map = Element('assets/map.svg')
-#marker = Element('assets/marker.svg').scale(size_in_one_hundredth).rotate(-degrees, x_rotation_center, y_rotation_center)
-#marker2 = Element('assets/marker2.svg').scale(0.5).rotate(-45, 50, 50)
+map = Element('assets/map.svg')
+marker = Element('assets/marker.svg').scale(size_in_one_hundredth).rotate(-degrees, x_rotation_center, y_rotation_center)
+marker2 = Element('assets/marker2.svg').scale(0.5).rotate(-45, 50, 50)
 
-#output.placeat(map, 0, 0)
-#output.placeat(marker, 170.9, 0.08)
-#output.placeat(marker2, 100.9, 50)
+output.placeat(map, 0, 0)
+output.placeat(marker, 170.9, 0.08)
+output.placeat(marker2, 100.9, 50)
 
-#output.dump('output.svg')
-#output.save_as_png('output.png', 1024)
+output.dump('output.svg')
+output.save_as_png('output.png', 1024) #does not work under Windows, utilize PYVIPS library and system PATH for PYVIPS DLLs
+#--- convert SVG to PNG under Windows: ---
+https://github.com/libvips/build-win64-mxe/releases
+unzip and add the BIN folder with DLL's to the system PATH
+'''
+#comment this line out when moving the code for production, the only reason it's here is to create PNG files for easier preview in our team chat
+import pyvips 
 
 import pandas as pd
 from svgmanip import Element 
@@ -38,4 +45,8 @@ def make_graph_wind():
 
     output.dump('output/output.svg')
 
+    #comment the following section out when moving the code for production, it's here only to create PNG images for easier preview in our team chat:
+    image = pyvips.Image.thumbnail("output/output.svg", 600)
+    image.write_to_file("output/output.png")
+   
 make_graph_wind()
