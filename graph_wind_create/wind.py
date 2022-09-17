@@ -4,11 +4,13 @@
 #Basic syntaxis:
 #output = Element(384, 356)  # size of the output file, look up the SVG code to get correct proportions!
 
-#map = Element('assets/map.svg').rotate(-15)
-#marker = Element('assets/marker.svg').rotate(-5)
+#map = Element('assets/map.svg')
+#marker = Element('assets/marker.svg').scale(size_in_one_hundredth).rotate(-degrees, x_rotation_center, y_rotation_center)
+#marker2 = Element('assets/marker2.svg').scale(0.5).rotate(-45, 50, 50)
 
-#output.placeat(map, 107.81, 8.76)
+#output.placeat(map, 0, 0)
 #output.placeat(marker, 170.9, 0.08)
+#output.placeat(marker2, 100.9, 50)
 
 #output.dump('output.svg')
 #output.save_as_png('output.png', 1024)
