@@ -1,7 +1,7 @@
 #code by Maxim Angel, email: teachermaxim@gmail.com
 #You can see the latest version at https://github.com/nakigoe/sea/blob/main/graph_wind_create/wind.py
-#Python Library from https://github.com/CrazyPython/svgmanip
-#Basic syntaxis:
+
+#------ basic usage ------ Python Library from https://github.com/CrazyPython/svgmanip
 #output = Element(384, 356)  # size of the output file, look up the SVG code to get correct proportions!
 
 #map = Element('assets/map.svg')
