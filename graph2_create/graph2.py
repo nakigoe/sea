@@ -6,20 +6,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.ticker as ticker
-import math
-import cmath
 from cmath import rect
 
 from datetime import datetime, timedelta
 from matplotlib.font_manager import FontProperties
 
 from matplotlib import collections as mc
-from matplotlib import colors as mcolors
-from cycler import cycler
-
-import matplotlib.lines as lines
-import matplotlib.transforms as mtransforms
-import matplotlib.text as mtext
 
 def make_graph2():
     #total graph size with margins in inches:
