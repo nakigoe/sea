@@ -15,11 +15,13 @@ output.placeat(marker2, 100.9, 50)
 
 output.dump('output.svg')
 output.save_as_png('output.png', 1024) #does not work under Windows, utilize PYVIPS library and system PATH for PYVIPS DLLs
-#--- convert SVG to PNG under Windows: ---
-https://github.com/libvips/build-win64-mxe/releases
-unzip and add the BIN folder with DLL's to the system PATH
 '''
-#comment this line out when moving the code for production, the only reason it's here is to create PNG files for easier preview in our team chat
+
+# --------------------------- convert SVG to PNG under Windows: --------------------
+# https://github.com/libvips/build-win64-mxe/releases
+# unzip and add the BIN folder with DLL's to the system PATH
+# comment this line out when moving the code for production, the only reason it's here is to create PNG files for easier preview in our team chat
+
 import pyvips 
 
 import pandas as pd
