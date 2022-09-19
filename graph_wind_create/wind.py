@@ -28,6 +28,7 @@ import pandas as pd
 from svgmanip import Element 
 
 def make_graph_wind():
+    #!!! YOU HAVE TO SET THE WIDTH AND HEIGHT PROPERTIES INSIDE ALL SVG FILES MANUALLY IF THESE TWO PROPERTIES ARE ABSENT INSIDE SVG FILES' HEADERS!!!
     map_width = 535 #open the map SVG file to see it's width and height!
     map_height = 431
     sea = pd.read_csv('input/raw_data.csv')
