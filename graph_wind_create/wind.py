@@ -44,14 +44,14 @@ def make_graph_wind():
 
     wind_array=[]
     for i in range(len(sea.index)):
-        wind = Element('img/wind.svg').scale(0.25).rotate(direction[i], 44.715225, 18.5) #these numbers are marker's rotation points relative to the marker figure, open SVG to see its size, multiply width by 0.5, height by 0.12 to get these relative rotation coordinates!!!
+        wind = Element('img/wind.svg').scale(0.2).rotate(direction[i], 44.715225, 18.5) #these numbers are marker's rotation points relative to the marker figure, open SVG to see its size, multiply width by 0.5, height by 0.12 to get these relative rotation coordinates!!!
         wind_array.append(wind)
         output.placeat(wind_array[i], int(marker_x[i]), int(marker_y[i]))
 
     output.dump('output/output.svg')
 
     #comment the following section out when moving the code for production, it's here only to create PNG images for easier preview in our team chat:
-    #image = pyvips.Image.thumbnail("output/output.svg", map_width)
-    #image.write_to_file("output/output.png")
+    image = pyvips.Image.thumbnail("output/output.svg", map_width)
+    image.write_to_file("output/output.png")
    
 make_graph_wind()
