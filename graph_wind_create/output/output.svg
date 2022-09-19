@@ -6,9 +6,12 @@
         <g>
           <g>
             <g>
-              <g/>
-              <g transform="translate(0, 0) scale(1 1) ">
-                <g transform="translate(0, 0) scale(1 1) "><style type="text/css">
+              <g>
+                <g>
+                  <g>
+                    <g/>
+                    <g transform="translate(0, 0) scale(1 1) ">
+                      <g transform="translate(0, 0) scale(1 1) "><style type="text/css">
 	.st0{fill:#FFFFFF;}
 	.st1{fill:#EEEEEE;}
 	.st2{fill:#CCCCCC;stroke:#000000;stroke-width:0.2;stroke-linejoin:round;stroke-miterlimit:2.694;}
@@ -209,9 +212,42 @@
 	<text id="text32" transform="matrix(1.0731 0 0 1.0731 -14.453 -344.9647)" class="st7 st8">10km</text>
 </g>
 </g>
+                    </g>
+                  </g>
+                  <g transform="translate(267, 215) scale(1 1) translate(0, 0) scale(0.25 0.25)  rotate(0.000000 44.715225 18.500000)">
+                    <g transform="translate(0, 0) scale(1 1) ">
+                      <g id="Layer_2" data-name="Layer 2">
+                        <g id="drawing">
+                          <circle cx="44.71522" cy="18.5" r="18" style="fill:#f7931e;stroke:red;stroke-miterlimit:10"/>
+                          <polygon points="88.016 79.7 44.715 44.7 1.414 79.7 26.818 79.7 26.818 151.58 62.612 151.58 62.612 79.7 88.016 79.7" style="fill:#f0f;stroke:blue;stroke-miterlimit:10"/>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+                <g transform="translate(267, 215) scale(1 1) translate(0, 0) scale(0.25 0.25)  rotate(-180.000000 44.715225 18.500000)">
+                  <g transform="translate(0, 0) scale(1 1) ">
+                    <g id="Layer_2" data-name="Layer 2">
+                      <g id="drawing">
+                        <circle cx="44.71522" cy="18.5" r="18" style="fill:#f7931e;stroke:red;stroke-miterlimit:10"/>
+                        <polygon points="88.016 79.7 44.715 44.7 1.414 79.7 26.818 79.7 26.818 151.58 62.612 151.58 62.612 79.7 88.016 79.7" style="fill:#f0f;stroke:blue;stroke-miterlimit:10"/>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </g>
+              <g transform="translate(214, 301) scale(1 1) translate(0, 0) scale(0.25 0.25)  rotate(-90.000000 44.715225 18.500000)">
+                <g transform="translate(0, 0) scale(1 1) ">
+                  <g id="Layer_2" data-name="Layer 2">
+                    <g id="drawing">
+                      <circle cx="44.71522" cy="18.5" r="18" style="fill:#f7931e;stroke:red;stroke-miterlimit:10"/>
+                      <polygon points="88.016 79.7 44.715 44.7 1.414 79.7 26.818 79.7 26.818 151.58 62.612 151.58 62.612 79.7 88.016 79.7" style="fill:#f0f;stroke:blue;stroke-miterlimit:10"/>
+                    </g>
+                  </g>
+                </g>
               </g>
             </g>
-            <g transform="translate(267, 215) scale(1 1) translate(0, 0) scale(0.25 0.25)  rotate(0.000000 44.715225 18.500000)">
+            <g transform="translate(214, 301) scale(1 1) translate(0, 0) scale(0.25 0.25)  rotate(-270.000000 44.715225 18.500000)">
               <g transform="translate(0, 0) scale(1 1) ">
                 <g id="Layer_2" data-name="Layer 2">
                   <g id="drawing">
@@ -222,7 +258,7 @@
               </g>
             </g>
           </g>
-          <g transform="translate(267, 215) scale(1 1) translate(0, 0) scale(0.25 0.25)  rotate(-180.000000 44.715225 18.500000)">
+          <g transform="translate(428, 344) scale(1 1) translate(0, 0) scale(0.25 0.25)  rotate(-45.000000 44.715225 18.500000)">
             <g transform="translate(0, 0) scale(1 1) ">
               <g id="Layer_2" data-name="Layer 2">
                 <g id="drawing">
@@ -233,7 +269,7 @@
             </g>
           </g>
         </g>
-        <g transform="translate(214, 301) scale(1 1) translate(0, 0) scale(0.25 0.25)  rotate(-90.000000 44.715225 18.500000)">
+        <g transform="translate(428, 344) scale(1 1) translate(0, 0) scale(0.25 0.25)  rotate(-225.000000 44.715225 18.500000)">
           <g transform="translate(0, 0) scale(1 1) ">
             <g id="Layer_2" data-name="Layer 2">
               <g id="drawing">
@@ -244,7 +280,7 @@
           </g>
         </g>
       </g>
-      <g transform="translate(214, 301) scale(1 1) translate(0, 0) scale(0.25 0.25)  rotate(-270.000000 44.715225 18.500000)">
+      <g transform="translate(214, 366) scale(1 1) translate(0, 0) scale(0.25 0.25)  rotate(-135.000000 44.715225 18.500000)">
         <g transform="translate(0, 0) scale(1 1) ">
           <g id="Layer_2" data-name="Layer 2">
             <g id="drawing">
@@ -255,7 +291,7 @@
         </g>
       </g>
     </g>
-    <g transform="translate(428, 387) scale(1 1) translate(0, 0) scale(0.25 0.25)  rotate(-180.000000 44.715225 18.500000)">
+    <g transform="translate(214, 366) scale(1 1) translate(0, 0) scale(0.25 0.25)  rotate(-315.000000 44.715225 18.500000)">
       <g transform="translate(0, 0) scale(1 1) ">
         <g id="Layer_2" data-name="Layer 2">
           <g id="drawing">
