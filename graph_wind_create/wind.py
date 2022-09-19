@@ -28,27 +28,29 @@ import pandas as pd
 from svgmanip import Element 
 
 def make_graph_wind():
+    map_width = 535 #open the map SVG file to see it's width and height!
+    map_height = 431
     sea = pd.read_csv('input/raw_data.csv')
-    marker_x=sea['x']
-    marker_y=sea['y']
+    marker_x=map_width*sea['x']
+    marker_y=map_height*sea['y']
     direction=-sea['deg'] #the app rotates clockwise, but we want counterclockwise rotation counting from the South (if the South in the coming data = 0)
 
     #output file and graphics' placement
-    output = Element(960, 700)  # size of the output file.
+    output = Element(map_width, map_height)  # size of the output file.
 
     base = Element('img/map.svg') #increase the map size directly inside the SVG file to Your liking!
     output.placeat(base, 0, 0) #place the map at the top left corner of the output SVG composed image
 
     wind_array=[]
     for i in range(len(sea.index)):
-        wind = Element('img/wind.svg').scale(0.25).rotate(direction[i], 48, 20) #these numbers are marker's rotation points relative to the marker figure!!!
+        wind = Element('img/wind.svg').scale(0.25).rotate(direction[i], 44.715225, 18.5) #these numbers are marker's rotation points relative to the marker figure, open SVG to see its size, multiply width by 0.5, height by 0.12 to get these relative rotation coordinates!!!
         wind_array.append(wind)
         output.placeat(wind_array[i], int(marker_x[i]), int(marker_y[i]))
 
     output.dump('output/output.svg')
 
     #comment the following section out when moving the code for production, it's here only to create PNG images for easier preview in our team chat:
-    image = pyvips.Image.thumbnail("output/output.svg", 600)
+    image = pyvips.Image.thumbnail("output/output.svg", 535)
     image.write_to_file("output/output.png")
    
 make_graph_wind()
