@@ -32,8 +32,8 @@ def make_graph_wind():
     original_map_width = 535 #532.1  #SVG hardcoded numbers, open the SVG file!
     original_map_height = 431 #417.6 
     map_scale_up = 2 #increase the output dimensions to your liking by this parameter!
-    map_width = original_map_width*map_scale_up
-    map_height = original_map_height*map_scale_up
+    map_width = original_map_width * map_scale_up
+    map_height = original_map_height * map_scale_up
     
     sea = pd.read_csv('input/raw_data.csv')
     marker_x=map_width*sea['x']
