@@ -20,7 +20,6 @@ output.save_as_png('output.png', 1024) #does not work under Windows, utilize PYV
 # --------------------------- convert SVG to PNG under Windows: --------------------
 # https://github.com/libvips/build-win64-mxe/releases
 # unzip and add the BIN folder with DLL's to the system PATH
-# comment this line out when moving the code for production, the only reason it's here is to create PNG files for easier preview in our team chat
 
 import pyvips 
 
@@ -54,7 +53,6 @@ def make_graph_wind():
     
     output.dump('output/output.svg')
 
-    #comment the following section out when moving the code for production, it's here only to create PNG images for easier preview in our team chat:
     image = pyvips.Image.thumbnail("output/output.svg", map_width)
     image.write_to_file("output/output.png")
    
