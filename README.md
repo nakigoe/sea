@@ -26,7 +26,7 @@
 <br> The resulting dynamic graph3:
 
 <img style="display: block; width: calc(100vw - (100vw - 100%));" 
-  src="https://github.com/nakigoe/sea/blob/main/graph_wind_create/output/output.svg" 
+  src="https://github.com/nakigoe/sea/blob/main/graph_wind_create/output/output.png" 
   alt="Nakigoe Academy">
 
 <hr>
