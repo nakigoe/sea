@@ -36,9 +36,9 @@ def make_graph_wind():
     map_height = original_map_height * map_scale_up
     
     sea = pd.read_csv('input/raw_data.csv')
-    marker_x=map_width*sea['x']
-    marker_y=map_height*sea['y']
-    direction=-sea['deg'] #the app rotates clockwise, but we want counterclockwise rotation counting from the South (if the South in the coming data = 0)
+    marker_x = map_width * sea['x']
+    marker_y = map_height * sea['y']
+    direction = -sea['deg'] #the app rotates clockwise, but we want counterclockwise rotation counting from the South (if the South in the coming data = 0)
     
     #output file and graphics' placement
     output = Element(map_width, map_height)  # size of the output file.
