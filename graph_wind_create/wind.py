@@ -20,7 +20,6 @@ output.save_as_png('output.png', 1024) #does not work under Windows, utilize PYV
 # --------------------------- convert SVG to PNG under Windows: --------------------
 # https://github.com/libvips/build-win64-mxe/releases
 # unzip and add the BIN folder with DLL's to the system PATH
-
 import pyvips 
 
 import pandas as pd
