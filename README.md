@@ -27,7 +27,7 @@
 
 <img style="display: block; width: calc(100vw - (100vw - 100%));" 
   src="https://github.com/nakigoe/sea/blob/main/graph_wind_create/output/output.png" 
-  alt="Nakigoe Academy">
+  alt="風の向き Wind Direction">
 
 <hr>
 <p style="margin: 0 auto" align="center">私のウェブサイトをご覧ください：</p>
