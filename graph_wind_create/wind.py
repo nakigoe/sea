@@ -28,26 +28,30 @@ import pandas as pd
 from svgmanip import Element 
 
 def make_graph_wind():
-    #!!! YOU HAVE TO SET THE WIDTH AND HEIGHT PROPERTIES INSIDE ALL SVG FILES MANUALLY IF THESE TWO PROPERTIES ARE ABSENT INSIDE SVG FILES' HEADERS!!!
-    map_width = 535 #open the map SVG file to see it's width and height!
-    map_height = 431
+    #!!! YOU HAVE TO SET THE WIDTH AND HEIGHT PROPERTIES to 100% INSIDE ALL SVG FILES MANUALLY IF THESE TWO PROPERTIES ARE ABSENT INSIDE SVG FILES' HEADERS!!!
+    original_map_width = 535 #532.1  #SVG hardcoded numbers, open the SVG file!
+    original_map_height = 431 #417.6 
+    map_scale_up = 2 #increase the output dimensions to your liking by this parameter!
+    map_width = original_map_width*map_scale_up
+    map_height = original_map_height*map_scale_up
+    
     sea = pd.read_csv('input/raw_data.csv')
     marker_x=map_width*sea['x']
     marker_y=map_height*sea['y']
     direction=-sea['deg'] #the app rotates clockwise, but we want counterclockwise rotation counting from the South (if the South in the coming data = 0)
-
+    
     #output file and graphics' placement
     output = Element(map_width, map_height)  # size of the output file.
 
-    base = Element('img/map.svg') #increase the map size directly inside the SVG file to Your liking!
+    base = Element('img/map.svg').scale(map_scale_up)
     output.placeat(base, 0, 0) #place the map at the top left corner of the output SVG composed image
 
     wind_array=[]
     for i in range(len(sea.index)):
-        wind = Element('img/wind.svg').scale(0.2).rotate(direction[i], 44.715225, 18.5) #these numbers are marker's rotation points relative to the marker figure, open SVG to see its size, multiply width by 0.5, height by 0.12 to get these relative rotation coordinates!!!
+        wind = Element('img/wind.svg').scale(0.1667*map_scale_up).rotate(direction[i], 44.715225, 18.5) #these numbers are marker's rotation points relative to the marker figure, open SVG to see its size, multiply width by 0.5, height by 0.12 to get these relative rotation coordinates!!!
         wind_array.append(wind)
-        output.placeat(wind_array[i], int(marker_x[i]), int(marker_y[i]))
-
+        output.placeat(wind_array[i], marker_x[i], marker_y[i])
+    
     output.dump('output/output.svg')
 
     #comment the following section out when moving the code for production, it's here only to create PNG images for easier preview in our team chat:
