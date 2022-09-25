@@ -5,7 +5,7 @@ from .forms import DocumentForm
 
 def my_view(request):
     print(f"貴方は Python 3.6+ を使用しています。ここで失敗した場合は、正しいバージョンを使用してください。")
-    message = 'どんな数でのファイルをアップロードしてください！'
+    message = 'どんな数でのファイルをアップロードして下さい！'
     # Handle file upload
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
@@ -16,7 +16,7 @@ def my_view(request):
             # Redirect to the document list after POST
             return redirect('my-view')
         else:
-            message = 'フォームが無効でございます。このエラーを修正してください：'
+            message = 'フォームが無効でございます。このエラーを修正して下さい：'
     else:
         form = DocumentForm()  # An empty, unbound form
 
