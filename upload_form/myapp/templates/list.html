@@ -1,24 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja-JP">
     <head>
         <meta charset="utf-8">
-        <title>Minimal Django File Upload Example</title>
+        <title>ファイルアップロード</title>
+        <!--<link rel="icon" type="image/svg+xml" href="icon.svg" sizes="any">-->
     </head>
 
     <body>
         <!-- List of uploaded documents -->
         {% if documents %}
-            All documents in the database:
+            データベース内のすべての文書：
             <ul>
                 {% for document in documents %}
                     <li><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
                 {% endfor %}
             </ul>
         {% else %}
-            <p>No documents.</p>
+            <p>まだデータベースに文書がアップロードされておりません。</p>
         {% endif %}
 
         <!-- Upload form. Note enctype attribute! -->
+        <h2>ファイル選択</h2>
         <form action="{% url "my-view" %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ message }}
@@ -30,8 +32,7 @@
                 {{ form.docfile.errors }}
                 {{ form.docfile }}
             </p>
-
-            <p><input type="submit" value="Upload"/></p>
+            <p><input type="submit" value="確認"/></p>
         </form>
     </body>
 </html>
