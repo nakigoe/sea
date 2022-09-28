@@ -2,7 +2,9 @@ from django.shortcuts import redirect, render
 from .models import Document
 from .forms import DocumentForm
 
+from django.views.decorators.clickjacking import xframe_options_exempt
 
+@xframe_options_exempt
 def my_view(request):
     print(f"貴方は Python 3.6+ を使用しています。ここで失敗した場合は、正しいバージョンを使用してください。")
     message = 'どんな数でのファイルをアップロードして下さい！'
@@ -25,4 +27,6 @@ def my_view(request):
 
     # Render list page with the documents and the form
     context = {'documents': documents, 'form': form, 'message': message}
-    return render(request, 'list.html', context)
+    test = render(request, 'list.html', context)
+    test ['Content-Security-Policy'] = "frame-ancestors 'self' http://127.0.0.1:8000/"
+    return test

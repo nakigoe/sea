@@ -17,6 +17,9 @@
             <ul>
                 {% for document in documents %}
                     <li><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
+                        <iframe src="{{ document.docfile.url }}" width="320px" height="480px">
+                            <p>お使いのブラウザは iframe をサポートしていません。</p>
+                        </iframe>
                 {% endfor %}
             </ul>
         {% else %}
