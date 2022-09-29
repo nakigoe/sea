@@ -17,9 +17,9 @@
             <ul>
                 {% for document in documents %}
                     <li><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
-                        <iframe src="{{ document.docfile.url }}" width="320px" height="480px">
-                            <p>お使いのブラウザは iframe をサポートしていません。</p>
-                        </iframe>
+                        <object data="{{ document.docfile.name }}" type="application/pdf" frameborder="0" width="320px" height="480px" style="padding: 20px;">
+                            <embed src="{{ document.docfile.url }}" width="320px" height="480px"/> 
+                        </object>
                 {% endfor %}
             </ul>
         {% else %}
@@ -33,6 +33,9 @@
             {{ message }}
             <p>{{ form.non_field_errors }}</p>
 
+            <object data="{{ document.docfile.name }}" type="application/pdf" frameborder="0" width="320px" height="480px" style="padding: 20px;">
+                <embed src="{{ document.docfile.url }}" width="320px" height="480px"/> 
+            </object>
             <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
 
             <p>
