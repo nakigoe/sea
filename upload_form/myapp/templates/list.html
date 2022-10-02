@@ -10,6 +10,12 @@
         input[type='file'] {
             color: rgba(0, 0, 0, 0.75)
             }
+        #id_docfile {}
+        .button {
+          border-radius: 4px;
+          padding: 10px;
+          background-color: rgba(128,0,128,0.5);
+        }
     </style>
     <body>
         <!-- List of uploaded documents -->
@@ -43,7 +49,7 @@
 <!-- Preview the files before uploading section -->
 <input
   type="file"
-  name="docfile2"
+  name="docfile"
   id="fileElem"
   multiple
   accept="image/*,.pdf"
@@ -51,7 +57,10 @@
 <div id="fileList">
   <p>まだファイルが選択されていらっしゃいません</p>
 </div>
-<a href="#" id="fileSelect">ファイル選択して下さい</a>
+
+<!--<label for="id_docfile" class="button">ファイル選択</label>-->
+
+<a href="#" id="fileSelect" class="button">ファイル選択</a>
 
 <!-- Submit Button -->
 <p><input type="submit" value="確認"/></p>
