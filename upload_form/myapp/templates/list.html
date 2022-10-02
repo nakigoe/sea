@@ -3,7 +3,8 @@
     <head>
         <meta charset="utf-8">
         <title>ファイルアップロード</title>
-        <!--<link rel="icon" type="image/svg+xml" href="icon.svg" sizes="any">-->
+        {% load static %}
+        <link rel="icon" type="image/svg+xml" href="{% static 'icon.svg' %}" sizes="any">
     </head>
     <style>
         input[type='file'] {
@@ -33,16 +34,68 @@
             {{ message }}
             <p>{{ form.non_field_errors }}</p>
 
-            <object data="{{ document.docfile.name }}" type="application/pdf" frameborder="0" width="320px" height="480px" style="padding: 20px;">
-                <embed src="{{ document.docfile.url }}" width="320px" height="480px"/> 
-            </object>
             <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
-
             <p>
                 {{ form.docfile.errors }}
                 {{ form.docfile }}
             </p>
-            <p><input type="submit" value="確認"/></p>
-        </form>
-    </body>
+
+<!-- Preview the files before uploading section -->
+<input
+  type="file"
+  name="docfile2"
+  id="fileElem"
+  multiple
+  accept="image/*,.pdf"
+  style="display:none" />
+<div id="fileList">
+  <p>まだファイルが選択されていらっしゃいません</p>
+</div>
+<a href="#" id="fileSelect">ファイル選択して下さい</a>
+
+<!-- Submit Button -->
+<p><input type="submit" value="確認"/></p>
+</form>
+      
+<script>
+const fileSelect = document.getElementById("fileSelect"),
+    fileElem = document.getElementById("fileElem"),
+    fileList = document.getElementById("fileList");
+
+fileSelect.addEventListener("click", (e) => {
+  if (fileElem) {
+    fileElem.click();
+  }
+  e.preventDefault(); // prevent navigation to "#"
+}, false);
+
+fileElem.addEventListener("change", handleFiles, false);
+
+function handleFiles() {
+  if (!this.files.length) {
+    fileList.innerHTML = "<p>まだファイルが選択されていらっしゃいません</p>";
+  } else {
+    fileList.innerHTML = "";
+    const objectsList = document.createElement("div");
+    fileList.appendChild(objectsList);
+    for (let i = 0; i < this.files.length; i++) {
+      const li = document.createElement("object");
+      objectsList.appendChild(li);
+
+      const img = document.createElement("embed");
+      img.src = URL.createObjectURL(this.files[i]);
+      img.width = 320;
+      img.height = 480;
+      img.onload = () => {
+        URL.revokeObjectURL(this.src);
+      }
+      li.appendChild(img);
+      const info = document.createElement("div");
+      info.innerHTML = `${this.files[i].name}: ${this.files[i].size} bytes`;
+      li.appendChild(info);
+    }
+  }
+}
+</script>
+</body>
 </html>
