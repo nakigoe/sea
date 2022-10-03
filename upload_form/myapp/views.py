@@ -30,7 +30,7 @@ def list_view(request):
     # Render list page with the documents and the form
     context = {'documents': documents, 'form': form, 'message': message}
     test = render(request, 'list.html', context)
-    test ['Content-Security-Policy'] = "frame-ancestors 'self' https://3.115.9.253/"
+    test ['Content-Security-Policy'] = "frame-ancestors 'self' 3.115.9.253/"
     return test
 
 from django import template

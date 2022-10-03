@@ -5,29 +5,8 @@
         <title>ファイルアップロード</title>
         {% load static %}
         <link rel="icon" type="image/svg+xml" href="{% static 'icon.svg' %}" sizes="any">
+        <link rel="stylesheet" href="{% static 'main.css' %}">
     </head>
-    <style>
-        /*
-        input[type='file'] {
-            color: rgba(0, 0, 0, 0.75)
-            }
-        /* #id_docfile {display: none;} /* hide the original upload files button from Django forms, enable it back for testing*/
-        .button {
-          border-radius: 4px;
-          padding: 10px;
-          margin: 20px 5px 12px 5px;
-          background-color: rgba(128,0,128,0.5);
-          box-shadow: 0 0 3px black;
-          display: inline-block;
-        }
-        .button:hover {
-          cursor: pointer;
-        }
-        a.button {
-          text-decoration: none;
-          color: black;
-        }
-    </style>
     <body>
         <!-- List of uploaded documents -->
         {% if documents %}
@@ -80,49 +59,10 @@
 
 <!-- To see if the file is truely selected for testing purposes, remove in production -->
 <p style="font-size: 75%;">ファイル選択インジケータ：</p>
+
 {{ form.docfile }}
-
 </form>
-      
-<script>
-const fileSelect = document.getElementById("fileSelect"),
-    fileElem = document.getElementById("fileElem"),
-    fileList = document.getElementById("fileList");
 
-fileSelect.addEventListener("click", (e) => {
-  if (fileElem) {
-    fileElem.click();
-  }
-  e.preventDefault(); // prevent navigation to "#"
-}, false);
-
-fileElem.addEventListener("change", handleFiles, false);
-
-function handleFiles() {
-  if (!this.files.length) {
-    fileList.innerHTML = "<p>まだファイルが選択されていらっしゃいません</p>";
-  } else {
-    fileList.innerHTML = "";
-    const objectsList = document.createElement("div");
-    fileList.appendChild(objectsList);
-    for (let i = 0; i < this.files.length; i++) {
-      const li = document.createElement("object");
-      objectsList.appendChild(li);
-
-      const img = document.createElement("embed");
-      img.src = URL.createObjectURL(this.files[i]);
-      img.width = 320;
-      img.height = 480;
-      img.onload = () => {
-        URL.revokeObjectURL(this.src);
-      }
-      li.appendChild(img);
-      const info = document.createElement("div");
-      info.innerHTML = `${this.files[i].name}: ${this.files[i].size} bytes`;
-      li.appendChild(info);
-    }
-  }
-}
-</script>
+<script type="text/javascript" src="{% static 'main.js' %}"></script>
 </body>
 </html>
