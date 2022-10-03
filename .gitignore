@@ -8,6 +8,10 @@ __pycache__/
 # C extensions
 *.so
 
+#ignore local folders in upload_form
+upload_form/media/
+upload_form/etc/
+
 # Distribution / packaging
 .Python
 build/
@@ -129,6 +133,3 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-
-media/
-etc/
