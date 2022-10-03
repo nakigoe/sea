@@ -3,7 +3,9 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 from .models import Document
 from .forms import DocumentForm
 
-
+'''
+list.html, called at root url
+'''
 @xframe_options_exempt
 def my_view(request):
     print("貴方は Python 3.6+ を使用しています。ここで失敗した場合は、正しいバージョンを使用してください。")
