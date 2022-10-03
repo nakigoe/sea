@@ -7,14 +7,25 @@
         <link rel="icon" type="image/svg+xml" href="{% static 'icon.svg' %}" sizes="any">
     </head>
     <style>
+        /*
         input[type='file'] {
             color: rgba(0, 0, 0, 0.75)
             }
-        #id_docfile {}
+        /* #id_docfile {display: none;} /* hide the original upload files button from Django forms, enable it back for testing*/
         .button {
           border-radius: 4px;
           padding: 10px;
+          margin: 20px 5px 12px 5px;
           background-color: rgba(128,0,128,0.5);
+          box-shadow: 0 0 3px black;
+          display: inline-block;
+        }
+        .button:hover {
+          cursor: pointer;
+        }
+        a.button {
+          text-decoration: none;
+          color: black;
         }
     </style>
     <body>
@@ -43,7 +54,7 @@
             <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
             <p>
                 {{ form.docfile.errors }}
-                {{ form.docfile }}
+                
             </p>
 
 <!-- Preview the files before uploading section -->
@@ -58,12 +69,18 @@
   <p>まだファイルが選択されていらっしゃいません</p>
 </div>
 
-<!--<label for="id_docfile" class="button">ファイル選択</label>-->
+<!-- Just previews the files! -->
+<a href="#" id="fileSelect" class="button">ファイルのプレビュー</a>
 
-<a href="#" id="fileSelect" class="button">ファイル選択</a>
+<!-- True file select -->
+<label for="id_docfile" class="button">ファイル選択</label>
 
 <!-- Submit Button -->
-<p><input type="submit" value="確認"/></p>
+<input type="submit" value="確認" class="button" />
+
+<!-- To see if the file is truely selected for testing purposes, remove in production -->
+<p style="font-size: 75%;">ファイル選択インジケータ：</p>
+{{ form.docfile }}
 </form>
       
 <script>
