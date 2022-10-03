@@ -35,7 +35,7 @@
 
         <!-- Upload form. Note enctype attribute! -->
         <h2>ファイル選択</h2>
-        <form action="{% url "my-view" %}" method="post" enctype="multipart/form-data">
+        <form action="{% url "list-view" %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ message }}
             <p>{{ form.non_field_errors }}</p>

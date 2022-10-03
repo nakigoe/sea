@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render #this line is to render HTML
 from django.views.decorators.clickjacking import xframe_options_exempt
 from .models import Document
 from .forms import DocumentForm
@@ -7,7 +7,7 @@ from .forms import DocumentForm
 list.html, called at root url
 '''
 @xframe_options_exempt
-def my_view(request):
+def list_view(request):
     print("貴方は Python 3.6+ を使用しています。ここで失敗した場合は、正しいバージョンを使用してください。")
     message = 'どんな数でのファイルをアップロードして下さい！'
     # Handle file upload
@@ -18,7 +18,7 @@ def my_view(request):
             newdoc.save()
 
             # Redirect to the document list after POST
-            return redirect('my-view')
+            return redirect('list-view')
         else:
             message = 'フォームが無効でございます。このエラーを修正して下さい：'
     else:
