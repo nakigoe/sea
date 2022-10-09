@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
             name='Document',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('docfile', models.FileField(upload_to='home/ec2-user/test/pdf')),
+                ('docfile', models.FileField(upload_to='tosend')),
             ],
         ),
     ]
