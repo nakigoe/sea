@@ -1,3 +1,4 @@
+import subprocess
 from django.shortcuts import redirect, render #this line is to render HTML
 from django.views.decorators.clickjacking import xframe_options_exempt
 from . models import Document
@@ -25,6 +26,10 @@ def list_view(request):
     # Load documents for the list page
     documents = Document.objects.all()
 
+    send_message = 'blablabla'
+    #send_message = request.GET['send_message']
+
+    subprocess.run(["scp", "-i", "C:/Users/HP/.ssh/mykey.pem", "D:/Docs/Website/sea/upload_form/media/home/ec2-user/test/pdf/*", "ec2-user@3.115.9.253:/home/ec2-user/test/pdf/*"])
     # Render list page with the documents and the form
-    context = {'documents': documents, 'form': form, 'message': message}
+    context = {'documents': documents, 'form': form, 'message': message, 'text_to_send': send_message}
     return render(request, 'list.html', context)
