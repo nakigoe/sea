@@ -1,5 +1,7 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render #this line is to render HTML
 from django.views.decorators.clickjacking import xframe_options_exempt
+from django.urls import reverse
 from . models import Document
 from . forms import DocumentForm
 from .services import send_to_server
@@ -28,7 +30,20 @@ def list_view(request):
     # Load documents for the list page
     documents = Document.objects.all()
 
-    send_to_server("D:/Docs/Website/sea/upload_form/media/home/ec2-user/test/pdf/*")
     # Render list page with the documents and the form
     context = {'documents': documents, 'form': form, 'message': message, 'text_to_send': send_message}
     return render(request, 'list.html', context)
+
+def send_all(request):
+    # Load documents for the list page
+    documents = Document.objects.all()
+
+    #send_to_server("D:/Docs/Website/sea/upload_form/media/home/ec2-user/test/pdf/*")
+    if documents:
+        for document in documents:
+            send_to_server(document.docfile.url)
+            document.delete()
+    else:
+        text = 'no documents selected'
+
+    return HttpResponseRedirect(reverse('list-view'))
