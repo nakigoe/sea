@@ -11,8 +11,6 @@ from .services import send_to_server
 def list_view(request):
     print("貴方は Python 3.6+ を使用しています。ここで失敗した場合は、正しいバージョンを使用してください。")
     message = 'どんな数でのファイルをアップロードして下さい！'
-    send_message = 'blablabla'
-    #send_message = request.GET['send_message']
     # Handle file upload
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
@@ -31,7 +29,7 @@ def list_view(request):
     documents = Document.objects.all()
 
     # Render list page with the documents and the form
-    context = {'documents': documents, 'form': form, 'message': message, 'text_to_send': send_message}
+    context = {'documents': documents, 'form': form, 'message': message}
     return render(request, 'list.html', context)
 
 def send_all(request):
