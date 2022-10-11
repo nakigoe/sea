@@ -1,5 +1,7 @@
 '''save file to remote server'''
 import subprocess
 
-def send_to_server(send_from):
-    subprocess.run(["scp", "-i", "C:/Users/HP/.ssh/mykey.pem", send_from, "ec2-user@3.115.9.253:/home/ec2-user/test/pdf/*"])
+def send_to_server(local_path):
+    database_items_path="D:/Docs/Website/sea/upload_form"
+    complete_item_path= database_items_path + local_path
+    subprocess.run(["scp", "-i", "C:/Users/HP/.ssh/mykey.pem", complete_item_path, "ec2-user@3.115.9.253:/home/ec2-user/test/pdf/"])
