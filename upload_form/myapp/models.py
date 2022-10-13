@@ -22,14 +22,14 @@ class Document(models.Model):
     #         value = value / 1073741824.0
     #         ext = 'GB'
     #     return '%s %s' % (str(round(value, 2)), ext)
-    @property
-    def delete(self, using=None, keep_parents=False):
-        self.docfile.delete()
-        super().delete()
+    # @property
+    # def delete(self, using=None, keep_parents=False):
+    #     self.docfile.delete()
+    #     super().delete()
 
-    @property
-    def get_url(self):
-        if self.docfile and hasattr(self.docfile, 'url'):
-            return self.docfile.url
-        else:
-            return "/static/assembly.png"
+    # @property
+    # def get_url(self):
+    #     if self.docfile and hasattr(self.docfile, 'url'):
+    #         return self.docfile.url
+    #     else:
+    #         return "/static/assembly.png"

@@ -43,9 +43,11 @@ def send_all(request):
 
     #send_to_server("D:/Docs/Website/sea/upload_form/media/home/ec2-user/test/pdf/*")
     if documents:
-        for document in documents:
-            send_to_server(document.docfile.url)
-            document.delete()
+        for document in documents: #document is a model (reference) in the database
+            if document.docfile: #docfile is the actual file on disk. Here I check if the file is not deleted manually from tosend folder
+                send_to_server(document.docfile.url)
+                document.docfile.delete()
+                document.delete()
     else:
         text = 'no documents selected'
 

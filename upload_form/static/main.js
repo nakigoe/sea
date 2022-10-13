@@ -1,11 +1,25 @@
 const fileSelect = document.getElementById("fileSelect"),
     fileElem = document.getElementById("fileElem"),
-    fileList = document.getElementById("fileList");
+    fileList = document.getElementById("fileList"),
+    fileDrop = document.getElementById("dropZone");
 
 fileSelect.addEventListener("click", (e) => {
   if (fileElem) {
     fileElem.click();
   }
+  e.preventDefault(); // prevent navigation to "#"
+}, false);
+
+fileDrop.addEventListener("drop", (e) => {
+  if (fileElem) {
+    fileElem.click();
+  }
+  e.preventDefault(); // prevent navigation to "#"
+}, false);
+fileDrop.addEventListener("dragenter", (e) => {
+  e.preventDefault(); // prevent navigation to "#"
+}, false);
+fileDrop.addEventListener("dragover", (e) => {
   e.preventDefault(); // prevent navigation to "#"
 }, false);
 
