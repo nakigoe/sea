@@ -11,6 +11,18 @@ fileSelect.addEventListener("click", (e) => {
 
 fileElem.addEventListener("change", handleFiles, false);
 
+function formatBytes(bytes, decimals = 2) {
+  if (!+bytes) return '0 Bytes'
+
+  const k = 1024
+  const dm = decimals < 0 ? 0 : decimals
+  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+
+  const i = Math.floor(Math.log(bytes) / Math.log(k))
+
+  return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`
+}
+
 function handleFiles() {
   if (!this.files.length) {
     fileList.innerHTML = "<p>まだファイルが選択されていらっしゃいません</p>";
@@ -31,7 +43,9 @@ function handleFiles() {
       }
       li.appendChild(img);
       const info = document.createElement("div");
-      info.innerHTML = `${this.files[i].name}: ${this.files[i].size} bytes`;
+      const beautifulSize = formatBytes(this.files[i].size);
+      info.innerHTML = `${this.files[i].name}: ${beautifulSize} `;
+      // info.innerHTML = `${this.files[i].name}: ${this.files[i].size} bytes`;
       li.appendChild(info);
     }
   }
