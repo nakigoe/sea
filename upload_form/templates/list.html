@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <title>ファイルアップロード</title>
         {% load static %}
+        {% load sizify %}
         <link rel="icon" type="image/svg+xml" href="{% static 'icon.svg' %}" sizes="any">
         <link rel="stylesheet" href="{% static 'main.css' %}">
     </head>
@@ -13,10 +14,12 @@
             データベース内のすべての文書：
             <ul>
                 {% for document in documents %}
-                    <li><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
-                        <object data="{{ document.docfile.name }}" type="application/pdf" frameborder="0" width="320px" height="480px" style="padding: 20px;">
-                            <embed src="{{ document.docfile.url }}" width="320px" height="480px"/> 
-                        </object>
+                <li>
+                    <p><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a> {{ document.docfile.size|sizify }}</p>
+                    <object data="{{ document.docfile.name }}" type="application/pdf" frameborder="0" width="320px" height="480px" style="padding: 20px;">
+                        <embed src="{{ document.docfile.url }}" width="320px" height="480px"/> 
+                    </object>
+                </li>
                 {% endfor %}
             </ul>
         {% else %}

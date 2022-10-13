@@ -45,7 +45,6 @@ function handleFiles() {
       const info = document.createElement("div");
       const beautifulSize = formatBytes(this.files[i].size);
       info.innerHTML = `${this.files[i].name}: ${beautifulSize} `;
-      // info.innerHTML = `${this.files[i].name}: ${this.files[i].size} bytes`;
       li.appendChild(info);
     }
   }
