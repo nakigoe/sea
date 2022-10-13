@@ -32,6 +32,11 @@ def list_view(request):
     context = {'documents': documents, 'form': form, 'message': message}
     return render(request, 'list.html', context)
 
+def addrecord(request):    
+    newdoc = Document(docfile=request.FILES['docfile'])
+    newdoc.save()
+    return HttpResponseRedirect(reverse('list-view'))
+
 def send_all(request):
     # Load documents for the list page
     documents = Document.objects.all()
