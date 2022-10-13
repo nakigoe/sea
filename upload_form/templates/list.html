@@ -14,12 +14,14 @@
             データベース内のすべての文書：
             <ul>
                 {% for document in documents %}
-                <li>
-                    <p><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a> {{ document.docfile.size|sizify }}</p>
-                    <object data="{{ document.docfile.name }}" type="application/pdf" frameborder="0" width="320px" height="480px" style="padding: 20px;">
+                    {% if document.docfile %}
+                    <li>
+                        <p><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a> {{ document.docfile.size|sizify }}</p>
+                        <object data="{{ document.docfile.name }}" type="application/pdf" frameborder="0" width="320px" height="480px" style="padding: 20px;">
                         <embed src="{{ document.docfile.url }}" width="320px" height="480px"/> 
-                    </object>
-                </li>
+                        </object>
+                    </li>
+                    {% endif %}
                 {% endfor %}
             </ul>
         {% else %}
