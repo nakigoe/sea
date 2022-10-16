@@ -3,6 +3,17 @@ const fileSelect = document.getElementById("fileSelect"),
     fileList = document.getElementById("fileList"),
     dropbox = document.getElementById("dropZone");
 
+// self executing function here
+(function() {
+  // your page initialization code here
+  // the DOM will be available here
+  if (document.getElementById("databaseFilesList")) {
+    fileList.innerHTML = "<p>より多くのファイルを選択できます！</p>";
+  } else {
+    fileList.innerHTML = "<p>まだファイルが選択されていらっしゃいません。</p>";
+  }
+})();
+
 dropbox.addEventListener("dragenter", dragenter, false);
 dropbox.addEventListener("dragover", dragover, false);
 // dropbox.addEventListener("drop", drop, false);
@@ -42,7 +53,6 @@ function formatBytes(bytes, decimals = 2) {
 //handlefiles() displays the selected files on the screen without registration in the database, use it if you need to:
 function handleFiles() {
   if (!this.files.length) {
-    fileList.innerHTML = "<p>まだファイルが選択されていらっしゃいません</p>";
   } else {
     fileList.innerHTML = "";
     const objectsList = document.createElement("div");
@@ -63,6 +73,9 @@ function handleFiles() {
       const beautifulSize = formatBytes(this.files[i].size);
       info.innerHTML = `${this.files[i].name}: ${beautifulSize} `;
       li.appendChild(info);
-    }
+      }
+    const invite = document.createElement("p");
+    fileList.appendChild(invite);
+    invite.innerHTML = "ファイルを送る前に保留："
   }
 }
