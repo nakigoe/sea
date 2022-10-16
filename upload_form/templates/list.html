@@ -16,7 +16,7 @@
                 {% for document in documents %} <!-- Run through the models (references) in the database -->
                     {% if document.docfile %} <!-- Here I check whether the actual file has been deleted manually from 'tosend' folder -->
                     <li>
-                        <p><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a> {{ document.docfile.size|sizify }}</p>
+                        <p><a href="{{ document.docfile.url }}">/{{ document.docfile.name }}</a> {{ document.docfile.size|sizify }}</p>
                         <object data="{{ document.docfile.name }}" type="application/pdf" frameborder="0" style="padding: 20px;">
                             <embed src="{{ document.docfile.url }}" width="320px" height="480px"/> 
                         </object>
@@ -53,13 +53,14 @@
   <p>まだファイルが選択されていらっしゃいません</p>
 </div>
 
-<!-- Submit Button, remove onchange="form.submit()" from the input field to separate preview and upload if You need to -->
-<a href="#" id="fileSelect" class="button">プレビュー</a>
+<!-- Submit Button, remove onchange="form.submit()" from the input field to separate preview and upload input type="submit" if You need to -->
+<a href="#" id="fileSelect" class="button">ファイル選択</a>
 <!-- <input type="submit" value="保留" class="button" name="register"/> -->
 
-</form>
-
+<a href="cancelall/" class="button">すべてのファイルをキャンセル</a>
 <a href="sendall/" class="button">すべてのファイルを送信</a>
+
+</form>
 
 <!-- the script to preview files without registration in the local database: -->
 <script type="text/javascript" src="{% static 'main.js' %}"></script>

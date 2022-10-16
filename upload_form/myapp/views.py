@@ -47,7 +47,21 @@ def send_all(request):
             if document.docfile: #docfile is the actual file on disk. Here I check if the file is not deleted manually from tosend folder
                 send_to_server(document.docfile.url)
                 document.docfile.delete()
-                document.delete()
+            if document: document.delete() #remove the file reference from the database
+    else:
+        text = 'no documents selected'
+
+    return HttpResponseRedirect(reverse('list-view'))
+
+def cancel_all(request):
+    # Remove database references and the files themselves
+    #docfile is the actual file on disk. Here I check if the file is not deleted manually from tosend folder
+    documents = Document.objects.all()
+
+    if documents:
+        for document in documents: 
+            if document.docfile: document.docfile.delete() #docfile is the actual file on disk
+            if document: document.delete() #document is a model (reference) in the database
     else:
         text = 'no documents selected'
 

@@ -5,4 +5,5 @@ urlpatterns = [
     path('', views.list_view, name='list-view'),
     path('addrecord/', views.addrecord, name='add-record'),
     path('sendall/', views.send_all, name='send-all'),
+    path('cancelall/', views.cancel_all, name='cancel-all'),
 ]
