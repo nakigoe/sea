@@ -39,6 +39,7 @@ function formatBytes(bytes, decimals = 2) {
   return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`
 }
 
+//handlefiles() displays the selected files on the screen without registration in the database, use it if you need to:
 function handleFiles() {
   if (!this.files.length) {
     fileList.innerHTML = "<p>まだファイルが選択されていらっしゃいません</p>";
