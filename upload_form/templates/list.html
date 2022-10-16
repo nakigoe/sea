@@ -8,7 +8,7 @@
         <link rel="icon" type="image/svg+xml" href="{% static 'icon.svg' %}" sizes="any">
         <link rel="stylesheet" href="{% static 'main.css' %}">
     </head>
-    <body  id="dropZone">
+    <body id="dropZone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
         <!-- List of uploaded documents -->
         {% if documents %}
             <p>データベース内のすべての文書：</p>
@@ -43,6 +43,7 @@
 <!-- Preview the files before uploading section -->
 <input
   type="file"
+  onchange="form.submit()"
   name="docfile"
   id="fileElem"
   multiple
@@ -52,11 +53,9 @@
   <p>まだファイルが選択されていらっしゃいません</p>
 </div>
 
-<!-- Just previews the files! -->
-<a href="#" id="fileSelect" class="button">保留せずにファイルを見る</a>
-
-<!-- Submit Button -->
-<input type="submit" value="保留" class="button" name="register"/>
+<!-- Submit Button, remove onchange="form.submit()" from the input field to separate preview and upload if You need to -->
+<a href="#" id="fileSelect" class="button">プレビュー</a>
+<!-- <input type="submit" value="保留" class="button" name="register"/> -->
 
 </form>
 
