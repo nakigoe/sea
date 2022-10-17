@@ -31,14 +31,24 @@ function dragover(e) {
   e.stopPropagation();
   e.preventDefault();
 }
-dropbox.addEventListener("drop", (e) => {
+// dropbox.addEventListener("drop", (e) => {
+//   e.stopPropagation();
+//   e.preventDefault();
+
+//   const files = e.dataTransfer.files;
+//   testDrop(files);
+// }, false);
+
+dropbox.ondrop=function(e){
   e.stopPropagation();
   e.preventDefault();
-
-  const dt = e.dataTransfer;
-  const files = dt.files;
+  files = e.target.files || e.dataTransfer.files;
+  console.log(files);
+  fileElem.files = files;
+  fileSelect.files = files;
+  fileList.files = files;
   testDrop(files);
-}, false);
+}
 
 // function handleFilesDrop(files) {
 //   for (let i = 0; i < files.length; i++) {
@@ -63,7 +73,6 @@ function testDrop(files) {
     const objectsList = document.createElement("div");
     fileList.appendChild(objectsList);
     for (let i = 0; i < files.length; i++) {
-
       const li = document.createElement("object");
       objectsList.appendChild(li);
 
