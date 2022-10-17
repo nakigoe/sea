@@ -1,7 +1,7 @@
 const fileSelect = document.getElementById("fileSelect"),
     fileElem = document.getElementById("fileElem"),
     fileList = document.getElementById("fileList"),
-    dropbox = document.getElementById("dropZone");
+    dropbox = document.getElementById("dropzone");
 
 // self executing function here
 (function() {
@@ -21,15 +21,8 @@ const fileSelect = document.getElementById("fileSelect"),
   }
 })();
 
-//can't understand why it is not working:
-function toggle(name) {
-  // document.querySelectorAll(name).classList.toggle("hide");
-  // document.querySelectorAll(name).forEach(el => el.classList.toggle("hide"));
-}
-
 dropbox.addEventListener("dragenter", dragenter, false);
 dropbox.addEventListener("dragover", dragover, false);
-//dropbox.addEventListener("drop", drop, false);
 function dragenter(e) {
   e.stopPropagation();
   e.preventDefault();
@@ -39,11 +32,61 @@ function dragover(e) {
   e.preventDefault();
 }
 dropbox.addEventListener("drop", (e) => {
-  if (fileElem) {
-    fileElem.click();
-  }
-  e.preventDefault(); // prevent navigation to "#"
+  e.stopPropagation();
+  e.preventDefault();
+
+  const dt = e.dataTransfer;
+  const files = dt.files;
+  testDrop(files);
 }, false);
+
+function handleFilesDrop(files) {
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+
+    if (!file.type.startsWith('image/*,.pdf')){ continue }
+
+    const img = document.createElement("img");
+    img.classList.add("obj");
+    img.file = file;
+    preview.appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
+
+    const reader = new FileReader();
+    reader.onload = (e) => { img.src = e.target.result; };
+    reader.readAsDataURL(file);
+  } 
+}
+
+function testDrop(files) {
+  if (files.length) {
+    fileList.innerHTML = "";
+    const objectsList = document.createElement("div");
+    fileList.appendChild(objectsList);
+    for (let i = 0; i < files.length; i++) {
+
+      const li = document.createElement("object");
+      objectsList.appendChild(li);
+
+      const img = document.createElement("embed");
+      img.src = URL.createObjectURL(files[i]);
+      img.width = 320;
+      img.height = 480;
+      img.onload = () => {
+        URL.revokeObjectURL(files[i].src);
+      }
+      li.appendChild(img);
+      const info = document.createElement("div");
+      const beautifulSize = formatBytes(files[i].size);
+      info.classList.add("filePath");
+      info.innerHTML = `${files[i].name}: ${beautifulSize} `;
+      li.appendChild(info);
+      }
+    const invite = document.createElement("p");
+    fileList.appendChild(invite);
+    invite.innerHTML = "ファイルを送る前に保留："
+    document.getElementById('localDatabaseRegistration').classList.toggle('hide');
+  }
+}
 
 fileSelect.addEventListener("click", (e) => {
   if (fileElem) {

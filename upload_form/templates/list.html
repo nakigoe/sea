@@ -8,7 +8,7 @@
         <link rel="icon" type="image/svg+xml" href="{% static 'icon.svg' %}" sizes="any">
         <link rel="stylesheet" href="{% static 'main.css' %}">
     </head>
-    <body id="dropZone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+    <body id="dropzone" class="dropzone">
         <!-- List of uploaded documents -->
         {% if documents %}
             <p>ローカルデータベース内のすべての文書：</p>
@@ -30,7 +30,7 @@
 
 <!-- Upload form. Note enctype attribute! -->
 <h2>ファイル選択</h2>
-<form action="{% url 'list-view' %}" method="post" enctype="multipart/form-data">
+<form action="{% url 'list-view' %}" method="post" enctype="multipart/form-data" class="dropzone">
     {% csrf_token %}
     {{ message }}
     <p>{{ form.non_field_errors }}</p>
@@ -56,7 +56,7 @@
 
 <!-- Submit Button, remove onchange="form.submit()" from the input field to separate preview and upload input type="submit" if You need to -->
 <a href="#" id="fileSelect" class="button">ファイル選択</a>
-<input id="localDatabaseRegistration" type="submit" value="保留" class="button" name="register"/>
+<input id="localDatabaseRegistration" type="submit" value="保留" class="button" name="docfile"/>
 
 <a id="cancelAll" href="cancelall/" class="button">すべてのファイルをキャンセル</a>
 <a id="sendAll" href="sendall/" class="button">保留されたファイルを送信</a>
