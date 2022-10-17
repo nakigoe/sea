@@ -8,7 +8,7 @@
         <link rel="icon" type="image/svg+xml" href="{% static 'icon.svg' %}" sizes="any">
         <link rel="stylesheet" href="{% static 'main.css' %}">
     </head>
-    <body id="dropzone" class="dropzone">
+    <body id="dropzone">
         <!-- List of uploaded documents -->
         {% if documents %}
             <p>ローカルデータベース内のすべての文書：</p>
@@ -30,7 +30,7 @@
 
 <!-- Upload form. Note enctype attribute! -->
 <h2>ファイル選択</h2>
-<form action="{% url 'list-view' %}" method="post" enctype="multipart/form-data" class="dropzone">
+<form action="{% url 'list-view' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ message }}
     <p>{{ form.non_field_errors }}</p>
