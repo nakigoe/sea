@@ -81,6 +81,7 @@ function handleFiles() {
       li.appendChild(img);
       const info = document.createElement("div");
       const beautifulSize = formatBytes(this.files[i].size);
+      info.classList.add("filePath");
       info.innerHTML = `${this.files[i].name}: ${beautifulSize} `;
       li.appendChild(info);
       }

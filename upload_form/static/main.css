@@ -13,6 +13,9 @@ body {
     font-size: 1.334rem;
     text-align: center;
 }
+.filePath {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
 ul {
     list-style-type: none;
 }
