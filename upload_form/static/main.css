@@ -3,6 +3,23 @@ input[type='file'] {
     color: rgba(0, 0, 0, 0.75)
     }
 /* #id_docfile {display: none;} /* hide the original upload files button from Django forms, enable it back for testing*/
+@font-face {
+    font-family: 'msgothic';
+    src: url(/static/_FNT/msgothic.woff2) format('woff2');
+    font-display: block;
+}
+body {
+    font-family: 'msgothic';
+    font-size: 1.334rem;
+    text-align: center;
+}
+ul {
+    list-style-type: none;
+}
+input {
+    font-family: 'msgothic';
+    font-size: 1.334rem;
+}
 .button {
     border-radius: 4px;
     padding: 10px;
@@ -18,3 +35,10 @@ a.button {
     text-decoration: none;
     color: black;
     }
+.dropzone:active{
+  border-color:DimGrey;
+  color:DimGrey;
+}
+.hide {
+    display: none;
+}

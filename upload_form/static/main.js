@@ -11,12 +11,23 @@ const fileSelect = document.getElementById("fileSelect"),
     fileList.innerHTML = "<p>より多くのファイルを選択できます！</p>";
   } else {
     fileList.innerHTML = "<p>まだファイルが選択されていらっしゃいません。</p>";
+    document.getElementById('cancelAll').classList.toggle('hide');
+    document.getElementById('sendAll').classList.toggle('hide');
+  }
+  if (document.getElementById('fileList').innerHTML == "<p>まだファイルが選択されていらっしゃいません。</p>" || document.getElementById('fileList').innerHTML == "<p>より多くのファイルを選択できます！</p>") {
+    document.getElementById('localDatabaseRegistration').classList.toggle('hide');
   }
 })();
 
+//can't understand why it is not working:
+function toggle(name) {
+  // document.querySelectorAll(name).classList.toggle("hide");
+  // document.querySelectorAll(name).forEach(el => el.classList.toggle("hide"));
+}
+
 dropbox.addEventListener("dragenter", dragenter, false);
 dropbox.addEventListener("dragover", dragover, false);
-// dropbox.addEventListener("drop", drop, false);
+//dropbox.addEventListener("drop", drop, false);
 function dragenter(e) {
   e.stopPropagation();
   e.preventDefault();
@@ -52,8 +63,7 @@ function formatBytes(bytes, decimals = 2) {
 
 //handlefiles() displays the selected files on the screen without registration in the database, use it if you need to:
 function handleFiles() {
-  if (!this.files.length) {
-  } else {
+  if (this.files.length) {
     fileList.innerHTML = "";
     const objectsList = document.createElement("div");
     fileList.appendChild(objectsList);
@@ -77,5 +87,6 @@ function handleFiles() {
     const invite = document.createElement("p");
     fileList.appendChild(invite);
     invite.innerHTML = "ファイルを送る前に保留："
+    document.getElementById('localDatabaseRegistration').classList.toggle('hide');
   }
 }
