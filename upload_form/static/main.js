@@ -7,6 +7,8 @@ const fileSelect = document.getElementById("fileSelect"),
 (function() {
   // your page initialization code here
   // the DOM will be available here
+
+  //buttons hide toggle for better site usability
   if (document.getElementById("databaseFilesList")) {
     fileList.innerHTML = "<p>より多くのファイルを選択できます！</p>";
   } else {
