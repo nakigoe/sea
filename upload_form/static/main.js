@@ -3,6 +3,22 @@ const fileSelect = document.getElementById("fileSelect"),
     fileList = document.getElementById("fileList"),
     dropbox = document.getElementById("dropzone");
 
+function hide(selectors) {
+  for (const el of document.querySelectorAll(selectors)) {
+    if (!el.classList.contains('hide')) {
+      el.classList.add('hide');
+    }
+  }
+}
+
+function show(selectors) {
+  for (const el of document.querySelectorAll(selectors)) {
+    if (el.classList.contains('hide')) {
+      el.classList.remove('hide');
+    }
+  }
+}
+
 // self executing function here
 (function() {
   // your page initialization code here
@@ -13,11 +29,13 @@ const fileSelect = document.getElementById("fileSelect"),
     fileList.innerHTML = "<p>より多くのファイルを選択できます！</p>";
   } else {
     fileList.innerHTML = "<p>まだファイルが選択されていらっしゃいません。</p>";
-    document.getElementById('cancelAll').classList.toggle('hide');
-    document.getElementById('sendAll').classList.toggle('hide');
+    hide('#cancelAll, #sendAll');
   }
-  if (document.getElementById('fileList').innerHTML == "<p>まだファイルが選択されていらっしゃいません。</p>" || document.getElementById('fileList').innerHTML == "<p>より多くのファイルを選択できます！</p>") {
-    document.getElementById('localDatabaseRegistration').classList.toggle('hide');
+  //show registration button
+  if (document.querySelectorAll("#fileList .files").length > 0)  {
+    show('#localDatabaseRegistration');
+  } else {
+    hide('#localDatabaseRegistration');
   }
 })();
 
@@ -71,6 +89,7 @@ function testDrop(files) {
   if (files.length) {
     fileList.innerHTML = "";
     const objectsList = document.createElement("div");
+    objectsList.classList.add("files");
     fileList.appendChild(objectsList);
     for (let i = 0; i < files.length; i++) {
       const li = document.createElement("object");
@@ -120,6 +139,7 @@ function handleFiles() {
   if (this.files.length) {
     fileList.innerHTML = "";
     const objectsList = document.createElement("div");
+    objectsList.classList.add("files");
     fileList.appendChild(objectsList);
     for (let i = 0; i < this.files.length; i++) {
       const li = document.createElement("object");
