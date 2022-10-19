@@ -49,14 +49,6 @@ function dragover(e) {
   e.stopPropagation();
   e.preventDefault();
 }
-// dropbox.addEventListener("drop", (e) => {
-//   e.stopPropagation();
-//   e.preventDefault();
-
-//   const files = e.dataTransfer.files;
-//   testDrop(files);
-// }, false);
-
 dropbox.ondrop=function(e){
   e.stopPropagation();
   e.preventDefault();
@@ -67,23 +59,6 @@ dropbox.ondrop=function(e){
   fileList.files = files;
   testDrop(files);
 }
-
-// function handleFilesDrop(files) {
-//   for (let i = 0; i < files.length; i++) {
-//     const file = files[i];
-
-//     if (!file.type.startsWith('image/*,.pdf')){ continue }
-
-//     const img = document.createElement("img");
-//     img.classList.add("obj");
-//     img.file = file;
-//     preview.appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
-
-//     const reader = new FileReader();
-//     reader.onload = (e) => { img.src = e.target.result; };
-//     reader.readAsDataURL(file);
-//   } 
-// }
 
 function testDrop(files) {
   if (files.length) {
