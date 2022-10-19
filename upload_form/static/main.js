@@ -57,10 +57,10 @@ dropbox.ondrop=function(e){
   fileElem.files = files;
   fileSelect.files = files;
   fileList.files = files;
-  testDrop(files);
+  filesDrop(files);
 }
 
-function testDrop(files) {
+function filesDrop(files) {
   if (files.length) {
     fileList.innerHTML = "";
     const objectsList = document.createElement("div");
