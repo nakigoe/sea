@@ -57,38 +57,7 @@ dropbox.ondrop=function(e){
   fileElem.files = files;
   fileSelect.files = files;
   fileList.files = files;
-  filesDrop(files);
-}
-
-function filesDrop(files) {
-  if (files.length) {
-    fileList.innerHTML = "";
-    const objectsList = document.createElement("div");
-    objectsList.classList.add("files");
-    fileList.appendChild(objectsList);
-    for (let i = 0; i < files.length; i++) {
-      const li = document.createElement("object");
-      objectsList.appendChild(li);
-
-      const img = document.createElement("embed");
-      img.src = URL.createObjectURL(files[i]);
-      img.width = 320;
-      img.height = 480;
-      img.onload = () => {
-        URL.revokeObjectURL(files[i].src);
-      }
-      li.appendChild(img);
-      const info = document.createElement("div");
-      const beautifulSize = formatBytes(files[i].size);
-      info.classList.add("filePath");
-      info.innerHTML = `${files[i].name}: ${beautifulSize} `;
-      li.appendChild(info);
-      }
-    const invite = document.createElement("p");
-    fileList.appendChild(invite);
-    invite.innerHTML = "ファイルを送る前に保留：";
-    show('#localDatabaseRegistration');
-  }
+  handleFiles();
 }
 
 fileSelect.addEventListener("click", (e) => {
