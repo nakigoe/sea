@@ -86,8 +86,8 @@ function filesDrop(files) {
       }
     const invite = document.createElement("p");
     fileList.appendChild(invite);
-    invite.innerHTML = "ファイルを送る前に保留："
-    document.getElementById('localDatabaseRegistration').classList.toggle('hide');
+    invite.innerHTML = "ファイルを送る前に保留：";
+    show('#localDatabaseRegistration');
   }
 }
 
@@ -136,7 +136,7 @@ function handleFiles() {
       }
     const invite = document.createElement("p");
     fileList.appendChild(invite);
-    invite.innerHTML = "ファイルを送る前に保留："
-    document.getElementById('localDatabaseRegistration').classList.toggle('hide');
+    invite.innerHTML = "ファイルを送る前に保留：";
+    show('#localDatabaseRegistration');
   }
 }
