@@ -4,17 +4,17 @@ const fileSelect = document.getElementById("fileSelect"),
     dropbox = document.getElementById("dropzone");
 
 function hide(selectors) {
-  for (const el of document.querySelectorAll(selectors)) {
-    if (!el.classList.contains('hide')) {
-      el.classList.add('hide');
+  for (const tag of document.querySelectorAll(selectors)) {
+    if (!tag.classList.contains('hide')) {
+      tag.classList.add('hide');
     }
   }
 }
 
 function show(selectors) {
-  for (const el of document.querySelectorAll(selectors)) {
-    if (el.classList.contains('hide')) {
-      el.classList.remove('hide');
+  for (const tag of document.querySelectorAll(selectors)) {
+    if (tag.classList.contains('hide')) {
+      tag.classList.remove('hide');
     }
   }
 }
