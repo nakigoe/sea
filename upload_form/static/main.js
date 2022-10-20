@@ -53,10 +53,7 @@ dropbox.ondrop=function(e){
   e.stopPropagation();
   e.preventDefault();
   files = e.target.files || e.dataTransfer.files;
-  console.log(files);
   fileElem.files = files;
-  fileSelect.files = files;
-  fileList.files = files;
   handleFiles();
 }
 
