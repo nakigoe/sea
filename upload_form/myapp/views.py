@@ -69,3 +69,11 @@ def cancel_all(request):
         text = 'no documents selected'
 
     return HttpResponseRedirect(reverse('list-view'))
+
+def delete(request, id):
+    document = Document.objects.get(id=id)
+    if document.docfile: document.docfile.delete() #docfile is the actual file on disk
+    if document: document.delete() #document is a model (reference) in the database
+    return HttpResponseRedirect(reverse('list-view'))
+
+

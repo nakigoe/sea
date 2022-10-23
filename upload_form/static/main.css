@@ -38,6 +38,10 @@ a.button {
     text-decoration: none;
     color: black;
     }
+.delete {
+    color: white;
+    background-color: rgba(255,0,0,0.75);
+}
 .dropzone:active{
   border-color:DimGrey;
   color:DimGrey;

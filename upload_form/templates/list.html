@@ -16,7 +16,7 @@
                 {% for document in documents %} <!-- Run through the models (references) in the database -->
                     {% if document.docfile %} <!-- Here I check whether the actual file has been deleted manually from 'tosend' folder -->
                     <li>
-                        <p class="filePath"><a href="{{ document.docfile.url }}">/{{ document.docfile.name }}</a> {{ document.docfile.size|sizify }}</p>
+                        <p class="filePath"><a href="{{ document.docfile.url }}">/{{ document.docfile.name }}</a> {{ document.docfile.size|sizify }} <a class="button delete" href="delete/{{ document.id}}">X</a></p>
                         <object data="{{ document.docfile.name }}" type="application/pdf" frameborder="0" style="padding: 20px;">
                             <embed src="{{ document.docfile.url }}" width="320px" height="480px"/> 
                         </object>
