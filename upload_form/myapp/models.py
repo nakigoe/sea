@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils import timezone
+#from django.utils import timezone
 
 class Document(models.Model):
     docfile = models.FileField(upload_to='tosend/', max_length=128) #/documents/%Y/%m/%d

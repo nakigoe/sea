@@ -6,7 +6,7 @@ from . models import Document
 from . forms import DocumentForm
 from .services import send_to_server
 
-'''list.html, called at root url'''
+#list.html, called at root url:
 @xframe_options_exempt
 def list_view(request):
     print("貴方は Python 3.6+ を使用しています。ここで失敗した場合は、正しいバージョンを使用してください。")
@@ -15,8 +15,11 @@ def list_view(request):
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
-            newdoc = Document(docfile=request.FILES['docfile'])
-            newdoc.save()
+            files = request.FILES.getlist('docfile')
+            for f in files:
+                if request.method == 'POST' and f:
+                    newdoc = Document(docfile=f)
+                    newdoc.save()
 
             # Redirect to the document list after POST
             return redirect('list-view')
