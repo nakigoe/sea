@@ -1,0 +1,32 @@
+-------------------------------------- Install PyVips ----------------------------------------
+$ su root
+# dnf install python-requests
+# dnf install python-pip
+# dnf install python-wheel
+# subscription-manager repos --enable codeready-builder-for-rhel-9-x86_64-rpms
+# exit
+
+$ pip install pyvips
+
+----------------------------------------- Install LibVips -------------------------------------
+$ su root
+
+# subscription-manager repos --enable codeready-builder-for-rhel-9-$(arch)-rpms
+# dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+# dnf upgrade
+# dnf install snapd
+# systemctl enable --now snapd.socket
+# ln -s /var/lib/snapd/snap /snap
+
+logout/reboot RHEL9
+
+$ su root
+# snap wait system seed.loaded
+# snap install libvips
+
+The libvips will be in the root folder:  /var/lib/snapd/snap/libvips/11/libvips/libvips/.libs/libvips.so.42
+
+--------------------------------- Run the wind.py app -------------------------------
+Go to the app folder first, then
+
+$ python wind.py

@@ -1,0 +1,3 @@
+=============================== Install Libvips under Windows =====================================
+https://github.com/libvips/build-win64-mxe/releases
+unzip and add the BIN folder with DLL's to the system PATH

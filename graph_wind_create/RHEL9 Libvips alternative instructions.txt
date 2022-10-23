@@ -1,0 +1,22 @@
+-------------------------------------- Setup Python ----------------------------------------
+$ su root
+# dnf install python-requests
+# dnf install python-pip
+# dnf install python-wheel
+
+-------------------------------------- Install Libvips ----------------------------------------
+# subscription-manager repos --enable codeready-builder-for-rhel-9-x86_64-rpms
+# subscription-manager repos --enable codeready-builder-for-rhel-9-$(arch)-rpms
+# dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+# dnf install https://rpms.remirepo.net/enterprise/remi-release-9.rpm
+# dnf config-manager --set-enabled remi
+# dnf install vips vips-devel vips-tools
+# dnf upgrade
+
+--------------------------------- Install the app dependencies -------------------------------
+$ pip install pyvips
+$ pip install pandas
+$ pip install svgutils
+
+-------------------------------------- Run the wind.py app -------------------------------------
+$ python wind.py
