@@ -112,6 +112,8 @@ function handleFiles() {
     invite.innerHTML = "ファイルを送る前に保留：";
     show('#localDatabaseRegistration');
   } else if (this.files.length && (this.files.length + counter) > maximum) {
-    document.getElementById("error").innerHTML = `ファイルの数が多すぎます。<span class="counter">${maximum}</span> 下に減らしてください、最大 <span class="counter">${maximum - counter}</span> つのファイルを追加できます。`;
+    //<span class="counters">${maximum}</span> 下に減らしてください、
+    document.getElementById("error").innerHTML = `ファイルの数が多すぎます。最大 <span class="counters">${maximum - counter}</span> つのファイルを追加できます。`;
+    document.getElementById("error").scrollIntoView({behavior: "smooth"});
   }
 }

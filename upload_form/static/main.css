@@ -53,11 +53,17 @@ a.button {
     color:red;
     font-weight: bolder;
 }
-#error {
-    font-size: larger;
+#error, #info {
     margin: 1em;
 }
 .counters {
     font-weight: bolder;
     color: rgb(0,0,40);
+}
+#error {
+    color: rgb(128,0,0);
+    font-weight: bolder;
+}
+#error.counters {
+    color: rgb(128,0,20);
 }
