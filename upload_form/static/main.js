@@ -1,7 +1,9 @@
 const fileSelect = document.getElementById("fileSelect"),
     fileElem = document.getElementById("fileElem"),
     fileList = document.getElementById("fileList"),
-    dropbox = document.getElementById("dropzone");
+    dropbox = document.getElementById("dropzone"),
+    counter = parseInt(document.getElementById("counter").innerHTML),
+    maximum = parseInt(document.getElementById("maximum").innerHTML);
 
 function hide(selectors) {
   for (const tag of document.querySelectorAll(selectors)) {
@@ -26,7 +28,7 @@ function show(selectors) {
 
   //buttons hide toggle for better site usability
   if (document.getElementById("databaseFilesList")) {
-    fileList.innerHTML = "<p>より多くのファイルを選択できます！</p>";
+    fileList.innerHTML = `<p>さらに <span class="counters">${maximum - counter}</span> 個のファイルを選択できます。</p>`;
   } else {
     fileList.innerHTML = "<p>まだファイルが選択されていらっしゃいません。</p>";
     hide('#cancelAll, #sendAll');
@@ -36,6 +38,10 @@ function show(selectors) {
     show('#localDatabaseRegistration');
   } else {
     hide('#localDatabaseRegistration');
+  }
+  //hide the selection button if the slots are full
+  if (counter >= maximum) {
+    hide('#fileSelect, .form-text');
   }
 })();
 
@@ -77,8 +83,9 @@ function formatBytes(bytes, decimals = 2) {
 
 //handlefiles() displays the selected files on the screen without registration in the database, use it if you need to:
 function handleFiles() {
-  if (this.files.length) {
+  if (this.files.length && (this.files.length + counter) <= maximum) {
     fileList.innerHTML = "";
+    document.getElementById("error").innerHTML = "";
     const objectsList = document.createElement("div");
     objectsList.classList.add("files");
     fileList.appendChild(objectsList);
@@ -104,5 +111,7 @@ function handleFiles() {
     fileList.appendChild(invite);
     invite.innerHTML = "ファイルを送る前に保留：";
     show('#localDatabaseRegistration');
+  } else if (this.files.length && (this.files.length + counter) > maximum) {
+    document.getElementById("error").innerHTML = `ファイルの数が多すぎます。<span class="counter">${maximum}</span> 下に減らしてください、最大 <span class="counter">${maximum - counter}</span> つのファイルを追加できます。`;
   }
 }

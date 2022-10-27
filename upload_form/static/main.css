@@ -49,3 +49,15 @@ a.button {
 .hide {
     display: none;
 }
+.red {
+    color:red;
+    font-weight: bolder;
+}
+#error {
+    font-size: larger;
+    margin: 1em;
+}
+.counters {
+    font-weight: bolder;
+    color: rgb(0,0,40);
+}

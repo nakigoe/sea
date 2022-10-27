@@ -6,39 +6,42 @@ from . models import Document
 from . forms import DocumentForm
 from .services import send_to_server
 
+maximum = 5
+
 #list.html, called at root url:
 @xframe_options_exempt
 def list_view(request):
     print("貴方は Python 3.6+ を使用しています。ここで失敗した場合は、正しいバージョンを使用してください。")
-    message = 'どんな数でのファイルをアップロードして下さい！'
+    #message = 'どんな数でのファイルをアップロードして下さい！'
+    message = f'ファイルを {maximum} つまで選択してください'
+    message_start = 'ファイルを'
+    message_end = 'つまで選択してください'
     # Handle file upload
-    if request.method == 'POST':
-        form = DocumentForm(request.POST, request.FILES)
-        if form.is_valid():
-            files = request.FILES.getlist('docfile')
-            for f in files:
-                if request.method == 'POST' and f:
-                    newdoc = Document(docfile=f)
-                    newdoc.save()
+    if Document.objects: documents_count = Document.objects.count()
+    if documents_count < maximum:
+        if request.method == 'POST':
+            form = DocumentForm(request.POST, request.FILES)
+            if form.is_valid():
+                files = request.FILES.getlist('docfile')
+                if documents_count + len(files) <= maximum:
+                    for f in files:
+                        if request.method == 'POST' and f:
+                            newdoc = Document(docfile=f)
+                            newdoc.save()
 
-            # Redirect to the document list after POST
-            return redirect('list-view')
-        else:
-            message = 'フォームが無効でございます。このエラーを修正して下さい：'
-    else:
-        form = DocumentForm()  # An empty, unbound form
+                # Redirect to the document list after POST
+                return redirect('list-view')
+            else:
+                message = 'フォームが無効でございます。このエラーを修正して下さい：'
+    
+    form = DocumentForm()  # An empty, unbound form
 
     # Load documents for the list page
     documents = Document.objects.all()
 
     # Render list page with the documents and the form
-    context = {'documents': documents, 'form': form, 'message': message}
+    context = {'documents': documents, 'form': form, 'message': message, 'maximum': maximum, 'documents_count': documents_count, 'message_start': message_start, 'message_end': message_end}
     return render(request, 'list.html', context)
-
-def addrecord(request):    
-    newdoc = Document(docfile=request.FILES['docfile'])
-    newdoc.save()
-    return HttpResponseRedirect(reverse('list-view'))
 
 def send_all(request):
     # Load documents for the list page

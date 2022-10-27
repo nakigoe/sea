@@ -29,16 +29,17 @@
         {% endif %}
 
 <!-- Upload form. Note enctype attribute! -->
-<h2>ファイル選択</h2>
+<h2 class="form-text">ファイル選択</h2>
 <form action="{% url 'list-view' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ message }}
+    <p>{{ message_start }} <span id="maximum" class="counters">{{ maximum }}</span> {{ message_end }}</p>
+
+    <div class="form-text">
     <p>{{ form.non_field_errors }}</p>
 
     <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
-    <p>
-        {{ form.docfile.errors }}
-    </p>
+    <p>{{ form.docfile.errors }}</p>
+    </div>
 
 <!-- Preview the files before uploading section -->
 <input
@@ -63,8 +64,10 @@
 <a id="sendAll" href="sendall/" class="button">保留されたファイルを送信</a>
 
 </form>
-
+<div id="info">最大 <span class="counters">{{ maximum }}</span> 個のファイルのうち <span id="counter" class="counters">{{ documents_count }}</span> 個を送信用に準備しました。</div>
+<div id="error"></div>
 <!-- the script to preview files without registration in the local database, I use it to hide the original input button and to have the customize button for files selection: -->
+
 <script type="text/javascript" src="{% static 'main.js' %}"></script>
 </body>
 </html>
