@@ -1,4 +1,4 @@
-<h1>水産業：<br>  •  温度[℃]<br>  •  海の波の向きと大きさ<br>  •  風の向き<br>Japan Fisheries: live data comes from the sensors located in the sea, the app shows the graphs for the sailors <br>  •  Sea Temperature Graph, <br>  •  Sea Waves Speed and Direction, <br>  •  Wind Direction</h1>
+<h1>水産業：<br> 温度[℃]<br> 海の波の向きと大きさ<br> 風の向き<br>Japan Fisheries: live data comes from the sensors located in the sea, the app shows the graphs for the sailors<h1><h2>  •  Sea Temperature Graph <br>  •  Sea Waves Speed and Direction <br>  •  Wind Direction</h1>
 
 
 <br> 成果物のディレクトリ構成：
