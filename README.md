@@ -1,4 +1,4 @@
-<h1>高知県の水産業<br> 温度[℃]<br> 海の波の向きと大きさ<br>  風の向き<br>Japan, Fisheries in Kochi Prefecture,<br> Sea Temperature Graph, <br> Sea Waves Speed and Direction, <br> Wind Direction</h1>
+<h1>水産業<br> 温度[℃]<br> 海の波の向きと大きさ<br>  風の向き<br>Japan, Fisheries in Kochi Prefecture,<br> Sea Temperature Graph, <br> Sea Waves Speed and Direction, <br> Wind Direction</h1>
 
 
 <br> 成果物のディレクトリ構成：
